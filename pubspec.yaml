@@ -40,6 +40,10 @@ dependencies:
   cloud_firestore: ^6.8.0
   google_sign_in: ^6.2.1
   flutter_facebook_auth: ^7.2.0
+  intl: ^0.20.3
+  geolocator: ^14.0.3
+  geocoding: ^5.0.0
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
