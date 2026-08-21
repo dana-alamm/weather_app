@@ -7,6 +7,7 @@ import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_text_field.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 import 'package:weather_app/features/auth/services/auth_services.dart';
+import 'package:weather_app/features/home/screens/home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -312,6 +313,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   backgroundColor: Colors.green,
                                                 ),
                                               );
+                                              Navigator.pushAndRemoveUntil(
+                                                context, 
+                                                MaterialPageRoute(
+                                                  builder: (context)=>const HomeScreen(),
+                                                  ), 
+                                                (route)=>false);
                                             } catch (e) {
                                               if (!mounted) return;
                                               ScaffoldMessenger.of(

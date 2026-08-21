@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
+import 'package:weather_app/features/auth/screens/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -40,7 +41,10 @@ class WelcomeScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context)=>LoginScreen()));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.blueColor,
                     shape: RoundedRectangleBorder(

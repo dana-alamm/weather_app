@@ -4,6 +4,7 @@ import 'package:weather_app/features/auth/screens/login_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:weather_app/features/home/screens/home_screen.dart';
+import 'package:weather_app/features/onboarding/screens/welcome_screen.dart';
 import 'firebase_options.dart';
 
 import 'features/home/providers/weather_provider.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
        
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }

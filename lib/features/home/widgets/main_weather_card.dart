@@ -29,7 +29,7 @@ class MainWeatherCard extends StatelessWidget {
           child: SizedBox(
           
             child: Image.asset(
-              'assets/images/Group 296.png',
+              'assets/images/rain_cloud.png',
                 height: 125,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Icon(

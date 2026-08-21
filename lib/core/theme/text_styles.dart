@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 
 abstract class TextStyles {
@@ -57,18 +58,56 @@ abstract class TextStyles {
     height: 1.0,
     color: Colors.black,
   );
-  static const TextStyle maxandMinTemperature=TextStyle(
+  static const TextStyle maxandMinTemperature = TextStyle(
     fontFamily: 'Inter',
     fontSize: 13,
     fontWeight: FontWeight.w400,
     height: 1,
-    color:Colors.black
+    color: Colors.black,
   );
-  static const TextStyle feelsTemp=TextStyle(
+  static const TextStyle feelsTemp = TextStyle(
     fontFamily: 'Inter',
     fontSize: 12,
     fontWeight: FontWeight.w400,
     height: 1,
-    color: Colors.white
+    color: Colors.white,
   );
+
+  static final TextStyle staticWord = GoogleFonts.dmSans(
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    height: 1.0,
+    letterSpacing: 1.2,
+    color: AppColors.circleShape2,
+  );
+  static final TextStyle savenDaysForcast = GoogleFonts.dmSans(
+    fontSize: 12,
+    height: 1.0,
+    fontWeight: FontWeight.w600,
+    decoration: TextDecoration.underline,
+    decorationColor: AppColors.circleShape1,
+    color: AppColors.circleShape1,
+    decorationStyle: TextDecorationStyle.solid,
+  );
+  static final TextStyle timeStyle = GoogleFonts.dmSans(
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    height: 1.0,
+    letterSpacing: 0.3,
+    //color: AppColors.circleShape2
+  );
+  static final TextStyle valueStyle=TextStyle(
+  fontFamily: 'Inter',
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+  height: 1.16,
+  color:Colors.black,
+  );
+  static final TextStyle unitStyle=TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: Colors.black
+  );
+
 }

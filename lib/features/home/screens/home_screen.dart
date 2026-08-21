@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
+import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/features/home/providers/weather_provider.dart';
 import 'package:weather_app/features/home/widgets/home_header.dart';
+import 'package:weather_app/features/home/widgets/hourly_forecast_section.dart';
 import 'package:weather_app/features/home/widgets/main_weather_card.dart';
 import 'package:weather_app/features/home/widgets/rain_alert_banner.dart';
+import 'package:weather_app/features/home/widgets/weather_details_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+int _currentNavIndex=0;
   @override
   void initState(){
     super.initState();
@@ -25,8 +28,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
+      extendBody: true,
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: _currentNavIndex,
+        onTap: (index){
+          setState(() {
+            _currentNavIndex=index;
+          });
+        }
+        ),
       body: AppBackground(
         child: SafeArea(
+          bottom: false,
           child: SingleChildScrollView(
             padding: const EdgeInsets.only(
               top: 20,
@@ -43,6 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 const MainWeatherCard(),
                 const SizedBox(height: 10,),
                 const RainAlertBanner(),
+                const SizedBox(height: 20,),
+                const HourlyForecastSection(),
+               const SizedBox(height: 20,),
+               const WeatherDetailsSection(),
+               const SizedBox(height: 100,),
                 ],
 
               
