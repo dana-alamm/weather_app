@@ -5,6 +5,7 @@ import 'package:weather_app/features/auth/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:weather_app/features/home/screens/home_screen.dart';
 import 'package:weather_app/features/onboarding/screens/welcome_screen.dart';
+import 'package:weather_app/features/search/providers/search_provider.dart';
 import 'firebase_options.dart';
 
 import 'features/home/providers/weather_provider.dart';
@@ -19,6 +20,7 @@ void main() async{
    MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => WeatherProvider()),
+        ChangeNotifierProvider(create: (_)=>SearchProvider()),
       ],
    child: const MyApp()
    ),

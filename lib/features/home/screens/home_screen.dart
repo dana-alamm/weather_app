@@ -8,6 +8,7 @@ import 'package:weather_app/features/home/widgets/hourly_forecast_section.dart';
 import 'package:weather_app/features/home/widgets/main_weather_card.dart';
 import 'package:weather_app/features/home/widgets/rain_alert_banner.dart';
 import 'package:weather_app/features/home/widgets/weather_details_section.dart';
+import 'package:weather_app/features/search/screens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +26,7 @@ int _currentNavIndex=0;
       context.read<WeatherProvider>().fetchLocationData();
     });
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +35,18 @@ int _currentNavIndex=0;
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentNavIndex,
         onTap: (index){
-          setState(() {
-            _currentNavIndex=index;
-          });
+         if(index==_currentNavIndex)return;
+         
+         switch(index){
+          case 0:
+          break;
+          case 1:
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context)=>const SearchScreen()),
+            );
+            break;
+         }
         }
         ),
       body: AppBackground(
