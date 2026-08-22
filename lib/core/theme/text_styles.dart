@@ -127,4 +127,10 @@ abstract class TextStyles {
   height: 1,
   color:Colors.black,
   );
+  static const TextStyle dayName=TextStyle(
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    height: 1,
+  );
 }

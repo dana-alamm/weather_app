@@ -25,7 +25,8 @@ class SearchProvider  extends ChangeNotifier{
 
 
     try{
-      _isLoading=false;
+      _isLoading=false; // we need API here
+      
       notifyListeners();
     }catch (e){
       _isLoading=false;

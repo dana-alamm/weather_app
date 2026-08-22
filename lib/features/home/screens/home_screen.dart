@@ -28,37 +28,13 @@ int _currentNavIndex=0;
     });
   }
   
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentNavIndex,
-        onTap: (index){
-         if(index==_currentNavIndex)return;
-         
-         switch(index){
-          case 0:
-          break;
-          case 1:
-          Navigator.push(
-            context, 
-            MaterialPageRoute(builder: (context)=>const SearchScreen()),
-            );
-            break;
-            
-
-            case 2:
-            Navigator.push(
-              context,
-                MaterialPageRoute(builder: (context)=>const ForecastScreen()),
-            );
-            break;
-  
-         }
-        }
-        ),
+      
       body: AppBackground(
         child: SafeArea(
           bottom: false,
@@ -90,6 +66,8 @@ int _currentNavIndex=0;
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
     );
+    
   }
 }

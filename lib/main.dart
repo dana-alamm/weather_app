@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/core/services/shared_prefs_service.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -15,6 +16,8 @@ void main() async{
   await Firebase.initializeApp(
     options:DefaultFirebaseOptions.currentPlatform
   );
+  await SharedPrefsService.init();
+  final bool isLoggedIn=SharedPrefsService.getData(key: 'isLoggedIn')??false;
 
   runApp(
    MultiProvider(
@@ -22,13 +25,14 @@ void main() async{
         ChangeNotifierProvider(create: (_) => WeatherProvider()),
         ChangeNotifierProvider(create: (_)=>SearchProvider()),
       ],
-   child: const MyApp()
+   child: MyApp(isLoggedIn: isLoggedIn),
    ),
    );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({super.key, required this.isLoggedIn});
 
   // This widget is the root of your application.
   @override
@@ -40,61 +44,8 @@ class MyApp extends StatelessWidget {
        
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const WelcomeScreen(),
+      home: isLoggedIn?const HomeScreen() :const WelcomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
- 
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-     
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
- 
-    return Scaffold(
-      appBar: AppBar(
-       
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        
-        title: Text(widget.title),
-      ),
-      body: Center(
-        
-        child: Column(
-       
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}

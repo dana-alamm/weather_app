@@ -73,14 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentNavIndex,
-        onTap: (index) {
-          setState(() {
-            _currentNavIndex = index;
-          });
-        },
-      ),
+      
       body: AppBackground(
         child: SafeArea(
           bottom: false,
@@ -136,6 +129,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
     );
   }
 }
