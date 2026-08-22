@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:weather_app/features/forecast/screens/forecast_screen.dart';
 import 'package:weather_app/features/home/providers/weather_provider.dart';
 import 'package:weather_app/features/home/widgets/home_header.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_section.dart';
@@ -46,6 +47,15 @@ int _currentNavIndex=0;
             MaterialPageRoute(builder: (context)=>const SearchScreen()),
             );
             break;
+            
+
+            case 2:
+            Navigator.push(
+              context,
+                MaterialPageRoute(builder: (context)=>const ForecastScreen()),
+            );
+            break;
+  
          }
         }
         ),
