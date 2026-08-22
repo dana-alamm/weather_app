@@ -96,18 +96,35 @@ abstract class TextStyles {
     letterSpacing: 0.3,
     //color: AppColors.circleShape2
   );
-  static final TextStyle valueStyle=TextStyle(
-  fontFamily: 'Inter',
-  fontSize: 24,
-  fontWeight: FontWeight.w500,
-  height: 1.16,
-  color:Colors.black,
+  static final TextStyle valueStyle = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+    height: 1.16,
+    color: Colors.black,
   );
-  static final TextStyle unitStyle=TextStyle(
+  static final TextStyle unitStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 13,
     fontWeight: FontWeight.w500,
-    color: Colors.black
+    color: Colors.black,
   );
-
+  static TextStyle cityName = GoogleFonts.dmSans(
+    fontWeight: FontWeight.w500,
+    fontSize: 15,
+    height: 1,
+    color: Color(0xff2D3561),
+  );
+  static TextStyle countryName=GoogleFonts.dmSans(
+   fontWeight: FontWeight.w400,
+   fontSize: 12,
+   height: 1,
+   color: Colors.grey,
+  );
+  static TextStyle recentTemp=GoogleFonts.dmSans(
+  fontWeight: FontWeight.w400,
+  fontSize: 22,
+  height: 1,
+  color:Colors.black,
+  );
 }
