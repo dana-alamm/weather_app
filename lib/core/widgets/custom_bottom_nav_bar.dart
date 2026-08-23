@@ -103,6 +103,7 @@ import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/forecast/screens/forecast_screen.dart';
 import 'package:weather_app/features/home/screens/home_screen.dart';
+import 'package:weather_app/features/profile/screens/profile_screen.dart';
 import 'package:weather_app/features/search/screens/search_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -165,7 +166,9 @@ class CustomBottomNavBar extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => const ForecastScreen()),
                   );
                 } else if (index == 3) {
-                // for profile
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context)=>const ProfileScreen()),
+                );
                 }
               },
               items: const [

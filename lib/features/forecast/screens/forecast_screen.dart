@@ -16,7 +16,7 @@ class ForecastScreen extends StatefulWidget {
 }
 
 class _ForecastScreenState extends State<ForecastScreen> {
-  int _currentNavIndex=2;
+ // int _currentNavIndex=2;
   final List<DailyForeCast>_weeklyForcast=const[
     DailyForeCast(
      dayName: 'Thu',

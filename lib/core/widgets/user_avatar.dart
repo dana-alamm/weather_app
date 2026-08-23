@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 
 class UserAvatar extends StatelessWidget {
   final String userName;
@@ -23,7 +24,21 @@ class UserAvatar extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
+      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle,
+      boxShadow: [
+          BoxShadow(
+            color: backgroundColor.withOpacity(0.35),
+            blurRadius: 16,
+            spreadRadius: 2,
+            offset: const Offset(0, 6),
+          ),
+        ],
+         gradient: LinearGradient(
+                colors: [
+                  AppColors.circleShape1,
+                  AppColors.circleShape2,
+                ],
+              ),),
       alignment: Alignment.center,
       child: Text(
         _initialLetter,

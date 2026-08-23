@@ -133,4 +133,11 @@ abstract class TextStyles {
     fontSize: 14,
     height: 1,
   );
+  static const TextStyle userNameStyle=TextStyle(
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    height: 1,
+    color: Colors.black
+  );
 }

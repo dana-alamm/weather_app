@@ -19,7 +19,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-int _currentNavIndex=0;
+//int _currentNavIndex=0;
+
   @override
   void initState(){
     super.initState();
