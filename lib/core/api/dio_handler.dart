@@ -42,7 +42,7 @@ class DioHandler {
           return reponse.data;
 
         } on DioException catch(e){
-          throw Exception(e.message ?? 'An unexpected network error occurred');
+         throw ErrorHandler.handle(e);
         }
         catch (e) {
           throw ErrorHandler.handle(e);

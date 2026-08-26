@@ -1,30 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/services/location_service.dart';
+import 'package:weather_app/core/models/weather_model.dart';
+import 'package:weather_app/core/services/api_services.dart';
+import 'package:weather_app/core/services/location_service.dart'; // تأكدي من المسار
 
-class WeatherProvider extends ChangeNotifier{
-  bool isLoading=false;
-  String cityName='Loading....';
-  double? latitude;
-  double? longitude;
-  String? errorMessage;
+class WeatherProvider extends ChangeNotifier {
+  final ApiServices _apiServices = ApiServices();
 
+  WeatherModel? _currentWeather;
+  String _cityName = 'Loading...';
+  bool _isLoading = false;
+  String? _errorMessage;
 
-  Future<void> fetchLocationData() async {
-    isLoading=true;
-    errorMessage=null;
+  WeatherModel? get currentWeather => _currentWeather;
+  String get cityName => _cityName;
+  bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
+
+  Future<void> fetchCurrentWeather() async {
+    _isLoading = true;
+    _errorMessage = null;
     notifyListeners();
 
     try {
-      final locationData=await LocationService.getCurrentLocationData();
-      cityName=locationData['cityName']?? 'Unknown City';
-      latitude=locationData['latitude'];
-      longitude=locationData['longitude'];
-    } catch (e) {
-      errorMessage=e.toString();
-      cityName='Unknown City';
+      // 1. جلب الموقع واسم المدينة من كلاس LocationService
+      final locationData = await LocationService.getCurrentLocationData();
+      _cityName = locationData['cityName'];
 
-    }finally{
-      isLoading=false;
+      // 2. جلب بيانات الطقس بالإحداثيات المسترجعة
+      _currentWeather = await _apiServices.getCurrentWeather(
+        lat: locationData['latitude'],
+        lon: locationData['longitude'],
+      );
+    } catch (e) {
+      _errorMessage = e.toString();
+    } finally {
+      _isLoading = false;
       notifyListeners();
     }
   }

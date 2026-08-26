@@ -1,8 +1,12 @@
 class ApiConstants {
-  static const String baseUrl='https://api.openweathermap.org/data/2.5';
   static const String apiKey='01e7cfd24aa8322795e9cd9c53ac8130';
 
-  static String currentWeather(String city)=>
-  '$baseUrl/weather?q=$city&units=metric&appid=$apiKey';
+  static const String baseUrl='https://api.openweathermap.org/data/4.0/onecall';
+  static const String geoBaseUrl = 'https://api.openweathermap.org/geo/1.0';
+
+  static const String current = '$baseUrl/current';
+  static const String hourly = '$baseUrl/timeline/1h';
+  static const String daily = '$baseUrl/timeline/1day';
+  static const String directGeo = '$geoBaseUrl/direct';
+  static const String reverseGeo = '$geoBaseUrl/reverse';
 }
-//منرتب البيانات الجاي من السيرفر لتصبح مقروئةوسهلة الاستخدام

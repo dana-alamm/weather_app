@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class MainWeatherCard extends StatelessWidget {
-  const MainWeatherCard({super.key});
+  final  WeatherModel weather;
+  const MainWeatherCard({super.key, required this.weather});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class MainWeatherCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '11°',
+                    '${weather.temp.round()}°',
                     style: TextStyles.temperatureNum,
                   ),
                   const SizedBox(height: 4,),
