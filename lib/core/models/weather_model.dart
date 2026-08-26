@@ -4,26 +4,36 @@ class WeatherModel {
   final String condition;
   final String description;
   final String icon;
-   WeatherModel({
+  final int humidity;
+  final double windSpeed;
+  final int pressure;
+  final int visibility;
+  WeatherModel({
     required this.temp,
     required this.feelsLike,
     required this.condition,
     required this.description,
     required this.icon,
-   });
-   factory WeatherModel.fromJson(Map<String,dynamic>json){
+    required this.humidity,
+    required this.windSpeed,
+    required this.pressure,
+    required this.visibility,
+  });
+  factory WeatherModel.fromJson(Map<String, dynamic> json) {
     final dataItem = (json['data'] as List).first as Map<String, dynamic>;
-    final weatherItem = (dataItem['weather'] as List).first as Map<String, dynamic>;
+    final weatherItem =
+        (dataItem['weather'] as List).first as Map<String, dynamic>;
 
     return WeatherModel(
-      temp: (dataItem['temp']as num).toDouble(),
-      feelsLike: (dataItem['feels_like']as num).toDouble(),
-
-      condition: weatherItem['main']??'',
-      description: weatherItem['description']??'',
-      icon: weatherItem['icon']??'',
-      );
-   }
-
-   
+      temp: (dataItem['temp'] as num).toDouble(),
+      feelsLike: (dataItem['feels_like'] as num).toDouble(),
+      condition: weatherItem['main'] ?? '',
+      description: weatherItem['description'] ?? '',
+      icon: weatherItem['icon'] ?? '',
+      humidity: (dataItem['humidity'] as num).toInt(),
+      windSpeed: (dataItem['wind_speed'] as num).toDouble(),
+      pressure: (dataItem['pressure'] as num).toInt(),
+      visibility: (dataItem['visibility'] as num).toInt(),
+    );
+  }
 }

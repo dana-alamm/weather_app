@@ -28,14 +28,13 @@
 //       context.read<WeatherProvider>().fetchCurrentWeather();
 //     });
 //   }
-  
-  
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       backgroundColor: Colors.transparent,
 //       extendBody: true,
-      
+
 //       body: AppBackground(
 //         child: SafeArea(
 //           bottom: false,
@@ -70,7 +69,7 @@
 //               }
 //             },
 //           )
-          
+
 //             child: SingleChildScrollView(
 //               padding: const EdgeInsets.only(
 //                 top: 20,
@@ -79,7 +78,7 @@
 //                 bottom: 16,
 //               ),
 //               child: Column(
-                
+
 //                 crossAxisAlignment: CrossAxisAlignment.start,
 //                 children: [
 //                   const HomeHeader(),
@@ -93,8 +92,7 @@
 //                  const WeatherDetailsSection(),
 //                  const SizedBox(height: 100,),
 //                   ],
-            
-                
+
 //               ),
 //             ),
 //           ),
@@ -102,7 +100,7 @@
 //       ),
 //       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
 //     );
-    
+
 //   }
 // }
 import 'package:flutter/material.dart';
@@ -158,7 +156,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           provider.errorMessage!,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         ElevatedButton(
@@ -190,7 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
                     const HourlyForecastSection(),
                     const SizedBox(height: 20),
-                    const WeatherDetailsSection(),
+                    // WeatherDetailsSection(weather: provider.currentWeather!,),
+                    if (provider.currentWeather != null)
+                      WeatherDetailsSection(weather: provider.currentWeather!),
                     const SizedBox(height: 100),
                   ],
                 ),

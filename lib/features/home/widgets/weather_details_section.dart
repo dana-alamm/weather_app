@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/home/widgets/detail_card.dart';
 
 class WeatherDetailsSection extends StatelessWidget {
-  const WeatherDetailsSection({super.key});
+  final WeatherModel weather;
+  const WeatherDetailsSection({super.key, required this.weather});
 
   @override
   Widget build(BuildContext context) {
+    final visibilityKm = (weather.visibility / 1000).toStringAsFixed(1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,30 +22,36 @@ class WeatherDetailsSection extends StatelessWidget {
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
           childAspectRatio: 1.25,
-          children: const [
+          children: [
             DetailCard(
               title: 'HUMIDITY',
-              value: '60',
+              value: '${weather.humidity}',
               unit: '%',
-              description: 'Moderate',
+              description: weather.humidity > 60 ? 'High' : 'Moderate',
             ),
             DetailCard(
               title: 'WIND',
-              value: '4.1',
+              value: "${weather.windSpeed}",
               unit: 'm/s',
-              description: 'SE · Gusts 3.5',
+              description: 'Gusts ${weather.windSpeed}',
             ),
             DetailCard(
               title: 'PRESSURE',
-              value: '1014',
+              value: '${weather.pressure}',
               unit: 'hPa',
-              description: 'Normal',
+              description: weather.pressure > 1020
+                  ? 'Sea level · High'
+                  : (weather.pressure < 1005
+                        ? 'Sea level · Low'
+                        : 'Sea level · Normal'),
             ),
             DetailCard(
               title: 'VISIBILITY',
-              value: '10',
+              value: visibilityKm,
               unit: 'km',
-              description: 'Clear view',
+              description: weather.visibility >= 10000
+                  ? 'Clear sight'
+                  : 'Low sight',
             ),
           ],
         ),

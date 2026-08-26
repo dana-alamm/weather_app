@@ -54,8 +54,8 @@ class MainWeatherCard extends StatelessWidget {
                     style: TextStyles.temperatureNum,
                   ),
                   const SizedBox(height: 4,),
-                  const Text(
-                    'Moderate Rain',
+                  Text(
+                    weather.condition,
                     style:TextStyles.WeatherToday,
                   ),
                   const SizedBox(height: 6,),
@@ -82,8 +82,8 @@ class MainWeatherCard extends StatelessWidget {
                       color:Colors.black,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: const Text(
-                      'Feels 9.8°',
+                    child: Text(
+                      'Feels ${weather.feelsLike.round()}°',
                       style: TextStyles.feelsTemp,
                     ),
                   )
