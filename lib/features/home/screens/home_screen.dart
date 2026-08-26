@@ -105,6 +105,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/features/home/providers/weather_provider.dart';
@@ -112,6 +113,7 @@ import 'package:weather_app/features/home/widgets/home_header.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_section.dart';
 import 'package:weather_app/features/home/widgets/main_weather_card.dart';
 import 'package:weather_app/features/home/widgets/rain_alert_banner.dart';
+import 'package:weather_app/features/home/widgets/sun_card.dart';
 import 'package:weather_app/features/home/widgets/weather_details_section.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -187,13 +189,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (provider.currentWeather != null)
                       MainWeatherCard(weather: provider.currentWeather!),
                     const SizedBox(height: 10),
-                    RainAlertBanner(weather: provider.currentWeather,),
+                    RainAlertBanner(weather: provider.currentWeather),
                     const SizedBox(height: 20),
                     const HourlyForecastSection(),
                     const SizedBox(height: 20),
                     // WeatherDetailsSection(weather: provider.currentWeather!,),
                     if (provider.currentWeather != null)
                       WeatherDetailsSection(weather: provider.currentWeather!),
+                    const SizedBox(height: 20),
+                    Text('SUN', style: TextStyles.staticWord),
+                    SizedBox(height: 12),
+                    const SunCard(),
                     const SizedBox(height: 100),
                   ],
                 ),
