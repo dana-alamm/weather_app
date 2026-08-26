@@ -1,3 +1,5 @@
+import 'package:weather_app/core/helpers/weather_icon_helper.dart';
+
 class WeatherModel {
   final double temp;
   final double feelsLike;
@@ -21,6 +23,9 @@ class WeatherModel {
     required this.visibility, 
     this.rain1h,
   });
+
+  String get assetIcon => getWeatherAssetIcon(icon);
+  
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     final dataItem = (json['data'] as List).first as Map<String, dynamic>;
     final weatherItem =
