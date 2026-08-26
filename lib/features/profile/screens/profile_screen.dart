@@ -5,6 +5,7 @@ import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/core/widgets/user_avatar.dart';
+import 'package:weather_app/features/profile/widgets/profile_state_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -36,18 +37,24 @@ class ProfileScreen extends StatelessWidget {
               children: [
               UserAvatar(
                 userName: userName,
-                size: 72,
+                size: 88,
                 ),
                 const SizedBox(height: 12,),
                 Text(
                   userName,
-                  style: TextStyles.userNameStyle,
+                  style: TextStyles.userNameStyle.copyWith(
+                    fontSize: 35,
+                  ),
                 ),
                 const SizedBox(height: 4,),
                 Text(
                   userEmail,
-                  style: TextStyles.subHeading,
-                )
+                  style: TextStyles.subHeading.copyWith(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox( height: 35,),
+                const ProfileStateCard(),
               ],
             ),
       )

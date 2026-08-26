@@ -140,4 +140,10 @@ abstract class TextStyles {
     height: 1,
     color: Colors.black
   );
+  static const TextStyle valueProfile=TextStyle(
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    height: 2.4,
+  );
 }
