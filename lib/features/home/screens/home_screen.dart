@@ -112,6 +112,7 @@ import 'package:weather_app/features/home/providers/weather_provider.dart';
 import 'package:weather_app/features/home/widgets/home_header.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_section.dart';
 import 'package:weather_app/features/home/widgets/main_weather_card.dart';
+import 'package:weather_app/features/home/widgets/precipitation_card.dart';
 import 'package:weather_app/features/home/widgets/rain_alert_banner.dart';
 import 'package:weather_app/features/home/widgets/sun_card.dart';
 import 'package:weather_app/features/home/widgets/weather_details_section.dart';
@@ -200,6 +201,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text('SUN', style: TextStyles.staticWord),
                     SizedBox(height: 12),
                     const SunCard(),
+                    const SizedBox(height: 20,),
+                     Text('PRECIPITATION', style: TextStyles.staticWord),
+                    SizedBox(height: 12),
+                    const PrecipitationCard(),
                     const SizedBox(height: 100),
                   ],
                 ),
