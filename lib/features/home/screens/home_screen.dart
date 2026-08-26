@@ -104,6 +104,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
@@ -192,7 +193,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 10),
                     RainAlertBanner(weather: provider.currentWeather),
                     const SizedBox(height: 20),
-                    const HourlyForecastSection(),
+                    HourlyForecastSection(hourly: provider.hourlyForecast,
+                    onForecastTap: () {
+                      
+                    },),
                     const SizedBox(height: 20),
                     // WeatherDetailsSection(weather: provider.currentWeather!,),
                     if (provider.currentWeather != null)
@@ -200,11 +204,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
                     Text('SUN', style: TextStyles.staticWord),
                     SizedBox(height: 12),
-                    const SunCard(),
-                    const SizedBox(height: 20,),
-                     Text('PRECIPITATION', style: TextStyles.staticWord),
+                    SunCard(
+                      progress: provider.sunProgress,
+                      now: DateFormat('HH:mm').format(DateTime.now()),
+                      sunrise: '06:00',
+                      sunset: '19:30',
+                    ),
+                    const SizedBox(height: 20),
+                    Text('PRECIPITATION', style: TextStyles.staticWord),
                     SizedBox(height: 12),
-                    const PrecipitationCard(),
+                    PrecipitationCard(
+                      hourly:provider.hourlyForecast,
+                    ),
                     const SizedBox(height: 100),
                   ],
                 ),

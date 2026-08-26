@@ -11,7 +11,7 @@ class ApiServices {
 
   })async{
     final response=await _apiClient.get(
-      ApiConstants.current,
+      ApiConstants.hourly,
       queryParameters: {
         'lat':lat,
         'lon':lon,

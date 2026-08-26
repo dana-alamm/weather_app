@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_card.dart';
 
 class HourlyForecastSection extends StatefulWidget {
+  final List<HourlyWeatherModel> hourly;
   final VoidCallback? onForecastTap;
-  const HourlyForecastSection({super.key, this.onForecastTap});
+  const HourlyForecastSection({super.key, this.onForecastTap, required this.hourly});
 
   @override
   State<HourlyForecastSection> createState() => _HourlyForecastSectionState();
@@ -14,13 +16,7 @@ class HourlyForecastSection extends StatefulWidget {
 class _HourlyForecastSectionState extends State<HourlyForecastSection> {
   int selectedIndex=1;
 
-  final List<Map<String, String>> hourlyData = const [
-    {'time': '10 AM', 'temp': '10°', 'rain': '85%', 'icon': 'assets/images/rain_cloud.png'},
-    {'time': 'NOW', 'temp': '11°', 'rain': '79%', 'icon': 'assets/images/rain_cloud.png'},
-    {'time': '2 PM', 'temp': '12°', 'rain': '55%', 'icon': 'assets/images/rain_cloud.png'},
-    {'time': '4 PM', 'temp': '13°', 'rain': '25%', 'icon': 'assets/images/rain_cloud.png'},
-    {'time': '6 PM', 'temp': '12°', 'rain': '0%', 'icon': 'assets/images/rain_cloud.png'},
-  ];
+ 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,14 +41,14 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
           clipBehavior: Clip.none,
          
           separatorBuilder: (context,Index)=>SizedBox(width: 10,), 
-          itemCount: hourlyData.length,
+          itemCount: widget.hourly.length,
           itemBuilder: (context, index) {
-            final item=hourlyData[index];
+            final item=widget.hourly[index];
             return HourlyForecastCard( 
-            time:item['time']!, 
-            imagePath: item['icon']!, 
-            temp: item['temp']!,
-            rainProbability: item['rain']!,
+            time:item.formattedHour, 
+            imagePath: item.assetIcon,
+            temp: '${item.temp.round()}°',
+            rainProbability: '${(item.pop * 100).round()}%',
             isSelected: selectedIndex==index,
             onTap: (){
               setState(() {
