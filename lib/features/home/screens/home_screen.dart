@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (provider.currentWeather != null)
                       MainWeatherCard(weather: provider.currentWeather!),
                     const SizedBox(height: 10),
-                    const RainAlertBanner(),
+                    RainAlertBanner(weather: provider.currentWeather,),
                     const SizedBox(height: 20),
                     const HourlyForecastSection(),
                     const SizedBox(height: 20),

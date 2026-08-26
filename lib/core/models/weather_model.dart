@@ -8,6 +8,7 @@ class WeatherModel {
   final double windSpeed;
   final int pressure;
   final int visibility;
+  final double? rain1h;
   WeatherModel({
     required this.temp,
     required this.feelsLike,
@@ -17,7 +18,8 @@ class WeatherModel {
     required this.humidity,
     required this.windSpeed,
     required this.pressure,
-    required this.visibility,
+    required this.visibility, 
+    this.rain1h,
   });
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     final dataItem = (json['data'] as List).first as Map<String, dynamic>;
@@ -34,6 +36,7 @@ class WeatherModel {
       windSpeed: (dataItem['wind_speed'] as num).toDouble(),
       pressure: (dataItem['pressure'] as num).toInt(),
       visibility: (dataItem['visibility'] as num).toInt(),
+      rain1h: dataItem['rain']!=null ?(dataItem['rain']['1h']as num?)?.toDouble():null,
     );
   }
 }
