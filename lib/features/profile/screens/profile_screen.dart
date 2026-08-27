@@ -5,6 +5,7 @@ import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/core/widgets/user_avatar.dart';
+import 'package:weather_app/features/profile/widgets/preference_tile.dart';
 import 'package:weather_app/features/profile/widgets/profile_state_card.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -55,8 +56,55 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox( height: 35,),
                 const ProfileStateCard(),
+                const SizedBox(height: 28,),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'PREFERENCES',
+                    style: TextStyles.staticWord,),
+                ),
+                const SizedBox(height: 12,),
+                Container(
+                  decoration: BoxDecoration(
+                    color:Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    
+                  ),
+                  child: Column(
+                    children: [
+      PreferenceTile(
+        iconEmoji: '🌡️',
+        title: 'Temperature',
+        value: 'Celsius',
+        onTap: () {},
+      ),
+      PreferenceTile(
+        iconEmoji: '💨',
+        title: 'Wind Speed',
+        value: 'm/s',
+        onTap: () {},
+      ),
+      PreferenceTile(
+        iconEmoji: '🕒',
+        title: 'Time Format',
+        value: '24h',
+        onTap: () {},
+      ),
+      PreferenceTile(
+        iconEmoji: '📍',
+        title: 'Home Location',
+        value: 'Turin, IT',
+        showDivider: false, 
+        onTap: () {},
+      ),
+                   
+                
               ],
-            ),
+                  ),
+                )
+              ]
+            )
+            
       )
       )
     ),

@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<WeatherProvider>().fetchCurrentWeather();
+      context.read<WeatherProvider>().fetchWeatherData();
     });
   }
 
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 16),
                         ElevatedButton(
-                          onPressed: () => provider.fetchCurrentWeather(),
+                          onPressed: () => context.read<WeatherProvider>().fetchWeatherData(),
                           child: const Text('Try Again'),
                         ),
                       ],
@@ -189,11 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const HomeHeader(),
                     const SizedBox(height: 24),
                     if (provider.currentWeather != null)
-                      MainWeatherCard(weather: provider.currentWeather!),
+                      MainWeatherCard(weather: provider.currentWeather!,hourly: provider.hourlyList,),
                     const SizedBox(height: 10),
                     RainAlertBanner(weather: provider.currentWeather),
                     const SizedBox(height: 20),
-                    HourlyForecastSection(hourly: provider.hourlyForecast,
+                    HourlyForecastSection(hourly: provider.hourlyList,
                     onForecastTap: () {
                       
                     },),
@@ -205,16 +205,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text('SUN', style: TextStyles.staticWord),
                     SizedBox(height: 12),
                     SunCard(
-                      progress: provider.sunProgress,
-                      now: DateFormat('HH:mm').format(DateTime.now()),
-                      sunrise: '06:00',
-                      sunset: '19:30',
+                     
                     ),
                     const SizedBox(height: 20),
                     Text('PRECIPITATION', style: TextStyles.staticWord),
                     SizedBox(height: 12),
                     PrecipitationCard(
-                      hourly:provider.hourlyForecast,
+                      hourly:provider.hourlyList,
                     ),
                     const SizedBox(height: 100),
                   ],

@@ -77,20 +77,21 @@ import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 
 class RainAlertBanner extends StatelessWidget {
-  final WeatherModel? weather;
+  final CurrentWeatherModel? weather;
   const RainAlertBanner({super.key, this.weather});
 
   @override
   Widget build(BuildContext context) {
+    final current = weather;
     if (weather==null) return const SizedBox.shrink();
 
     String title='';
     String description='';
     IconData iconData = Icons.beach_access_rounded;
 
-    if (weather!.rain1h != null && weather!.rain1h! > 0) {
+    if (weather?.rainAmount != null && weather!.rainAmount! > 0) {
       title = 'Grab an umbrella. ';
-      description = 'Rain expected — ${weather!.rain1h!.toStringAsFixed(2)} mm in the last hour.';
+      description = 'Rain expected — ${weather!.rainAmount!.toStringAsFixed(2)} mm in the last hour.';
       iconData = Icons.beach_access_rounded;
     } else if (weather!.windSpeed > 8.0) {
       title = 'Windy conditions. ';

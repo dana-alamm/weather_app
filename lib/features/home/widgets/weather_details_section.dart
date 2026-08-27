@@ -4,7 +4,7 @@ import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/home/widgets/detail_card.dart';
 
 class WeatherDetailsSection extends StatelessWidget {
-  final WeatherModel weather;
+  final CurrentWeatherModel weather;
   const WeatherDetailsSection({super.key, required this.weather});
 
   @override

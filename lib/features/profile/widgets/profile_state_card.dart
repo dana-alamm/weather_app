@@ -66,7 +66,7 @@ class ProfileStateCard extends StatelessWidget {
 Widget _buildFullLine() {
     return Container(
       width: 1.2,
-      color: Colors.grey
+      color: Colors.grey.withOpacity(0.4)
     );
   }
 }

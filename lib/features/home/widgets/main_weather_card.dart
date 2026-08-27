@@ -5,17 +5,18 @@ import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class MainWeatherCard extends StatelessWidget {
-  final  WeatherModel weather;
-  const MainWeatherCard({super.key, required this.weather});
+  final  CurrentWeatherModel weather;
+  final List<HourlyWeatherModel> hourly;
+  const MainWeatherCard({super.key, required this.weather, required this.hourly});
 
   @override
   Widget build(BuildContext context) {
-    final maxTemp = weather.hourly.isNotEmpty
-        ? weather.hourly.map((e) => e.temp).reduce((a, b) => a > b ? a : b)
+    final maxTemp = hourly.isNotEmpty
+        ? hourly.map((e) => e.temp).reduce((a, b) => a > b ? a : b)
         : weather.temp;
 
-    final minTemp = weather.hourly.isNotEmpty
-        ? weather.hourly.map((e) => e.temp).reduce((a, b) => a < b ? a : b)
+    final minTemp =hourly.isNotEmpty
+        ? hourly.map((e) => e.temp).reduce((a, b) => a < b ? a : b)
         : weather.temp;
     return Container(
     width: double.infinity,
@@ -40,7 +41,8 @@ class MainWeatherCard extends StatelessWidget {
           
             child: Image.asset(
               //'assets/images/rain_cloud.png',
-              getWeatherAssetIcon(weather.icon),
+             // getWeatherAssetIcon(weather.icon),
+             weather.assetIcon,
                 width: 80,
   height: 80,
               fit: BoxFit.contain,
