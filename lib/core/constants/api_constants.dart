@@ -7,6 +7,8 @@ class ApiConstants {
   static const String current = 'current';
   static const String hourly = 'timeline/1h';
   static const String daily = 'timeline/1day';
-  static const String directGeo = 'direct';
-  static const String reverseGeo = 'reverse';
+  // static const String directGeo = 'direct';
+  // static const String reverseGeo = 'reverse';
+  static const String directGeo = 'https://api.openweathermap.org/geo/1.0/direct';
+  static const String reverseGeo = 'https://api.openweathermap.org/geo/1.0/reverse';
 }

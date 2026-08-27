@@ -45,6 +45,43 @@ return rawList
 .toList();
   }
   
+  Future<List<SearchResultWeatherModel>> searchCityWithWeather(String query)async{
+   final response=await _apiClient.get(
+    ApiConstants.directGeo,
+    queryParameters: {
+      'q':query,
+      'limit':5,
+      'appid': ApiConstants.apiKey,
+    },
+   
+   );
+   final List geoList=response as List? ?? [];
+   if(geoList.isEmpty) return [];
+
+   final List<Future<SearchResultWeatherModel>>tasks=geoList.map((item)async{
+   final cityMap=item as Map<String,dynamic>;
+   final double lat = (cityMap['lat'] as num).toDouble();
+      final double lon = (cityMap['lon'] as num).toDouble();
+      final weather = await getCurrentWeather(lat: lat, lon: lon);
+
+      return SearchResultWeatherModel(
+        cityName: cityMap['name'] ?? '',
+        state: cityMap['state'] ?? '',
+        country: cityMap['country'] ?? '',
+        lat: lat,
+        lon: lon,
+        temp: weather.temp,
+        condition: weather.condition,
+        description: weather.description,
+        humidity: weather.humidity,
+        icon: weather.icon,
+      );
+   
+   }).toList();
+    
+    return await Future.wait(tasks);
+   
+  }
 
   
 }

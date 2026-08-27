@@ -9,6 +9,7 @@ import 'package:weather_app/features/search/widgets/current_location_button.dart
 import 'package:weather_app/features/search/widgets/custom_search_bar.dart';
 import 'package:weather_app/features/search/widgets/recent_city_tile.dart';
 import 'package:weather_app/features/search/widgets/search_header.dart';
+import 'package:weather_app/features/search/widgets/search_result_card.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -82,14 +83,20 @@ class _SearchScreenState extends State<SearchScreen> {
               top: 20,
               left: 16,
               right: 16,
-              bottom: 16,
+              bottom: 100,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SearchHeader(),
                 const SizedBox(height: 20),
-                CustomSearchBar(controller: _searchController),
+                CustomSearchBar(controller: _searchController,
+                onChanged:(val){
+                  context.read<SearchProvider>().searchCity(val);
+                } ,
+                onClear: () {
+                    context.read<SearchProvider>().clearSearch();
+                  },),
                 const SizedBox(height: 10),
 
                CurrentLocationButton(
@@ -102,28 +109,85 @@ class _SearchScreenState extends State<SearchScreen> {
                 },
                ),
                const SizedBox(height: 24,),
-               Text(
-                'Recent',
-                style: TextStyles.staticWord,
-               ),
-               const SizedBox(height: 12,),
-               ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context,index){
-                  final city=_recentCities[index];
-                  return RecentCityTile(
-                    city: city, 
-                    onTap: (){
-                       _searchController.text = city.name;
-                        context.read<SearchProvider>().searchCity(city.name);
+             Consumer<SearchProvider>(
+              builder: (context,searchProv,_){
+                if(searchProv.isLoading){
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top:40),
+                      child: CircularProgressIndicator(color:Colors.white),
+                      ),
+                  );
+                }
+                if(searchProv.errorMessage!=null){
+                  return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 40),
+                          child: Text(
+                            searchProv.errorMessage!,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      );
+                }
+                if(_searchController.text.trim().isNotEmpty){
+                  if(searchProv.searchResults.isEmpty){
+                    return const Center(
+                   child: Padding(
+                     padding: EdgeInsets.only(top: 40),
+                            child: Text(
+                              'No matching cities found.',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                   ),
+                    );
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: searchProv.searchResults.length,
+                    itemBuilder: (context,index){
+                      final cityResult=searchProv.searchResults[index];
+                      return SearchResultCard(
+                        weather: cityResult, 
+                        onTap: (){
+
+                        }
+                        );
                     }
                     );
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'RECENT',
+                      style: TextStyles.staticWord,
 
-                },
-                separatorBuilder: (context, index) => const SizedBox(height: 6),
-                itemCount: _recentCities.length
-                )
+                    ),
+                    const SizedBox(height: 12,),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context,index){
+                        final city=_recentCities[index];
+                        return RecentCityTile(
+                          city: city, 
+                          onTap: (){
+                            _searchController.text=city.name;
+                            context.read<SearchProvider>().searchCity(city.name);
+                          }
+                          );
+                      },
+                      separatorBuilder: (context,index)=>const SizedBox(height: 6,),
+
+                  
+                      itemCount: _recentCities.length,
+                      )
+                  ],
+                );
+              }
+              )
               ],
             ),
           ),

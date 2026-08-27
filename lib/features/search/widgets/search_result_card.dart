@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'package:weather_app/core/helpers/weather_icon_helper.dart';
+import 'package:weather_app/core/models/weather_model.dart';
+import 'package:weather_app/core/theme/text_styles.dart';
+
+class SearchResultCard extends StatelessWidget {
+  final SearchResultWeatherModel weather;
+  final VoidCallback onTap;
+  const SearchResultCard({
+    super.key,
+    required this.weather,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 14),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+               crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    '${weather.temp.round()}°',
+                    style: TextStyles.temperatureNum,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    weather.condition,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF1E293B),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    '${weather.cityName}, ${weather.country}',
+                    style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+                  ),
+
+                  const SizedBox(height: 2),
+                  Text(
+                    '${weather.description} · ${weather.humidity}% humidity',
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                  ),
+                ],
+              ),
+            ),
+            Image.asset(
+              getWeatherAssetIcon(weather.icon),
+              width: 80,
+              height: 80,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

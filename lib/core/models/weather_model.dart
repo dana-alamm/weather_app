@@ -99,3 +99,34 @@ class HourlyWeatherModel{
 
   }
 }
+
+class SearchResultWeatherModel{
+  final String cityName;
+  final String state;
+  final String country;
+  final double lat;
+  final double lon;
+  final double temp;
+  final String condition;
+  final String description;
+  final int humidity;
+  final String icon;
+
+  SearchResultWeatherModel({
+    required this.cityName,
+    required this.state,
+    required this.country,
+    required this.lat,
+    required this.lon,
+    required this.temp,
+    required this.condition,
+    required this.description,
+    required this.humidity,
+    required this.icon,
+  });
+  String get subtitle{
+    final parts=[cityName, if(state.isNotEmpty)state,country];
+    return parts.join(', ');
+  }
+
+}
