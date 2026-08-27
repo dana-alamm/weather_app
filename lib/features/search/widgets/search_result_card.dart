@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/core/helpers/weather_icon_helper.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/features/search/providers/search_provider.dart';
 
 class SearchResultCard extends StatelessWidget {
   final SearchResultWeatherModel weather;
@@ -15,7 +17,11 @@ class SearchResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){
+   context.read<SearchProvider>().addToRecent(weather);
+
+   onTap();
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 14),
         padding: const EdgeInsets.all(20),

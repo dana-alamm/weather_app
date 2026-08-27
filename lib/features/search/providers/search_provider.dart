@@ -12,10 +12,12 @@ class SearchProvider  extends ChangeNotifier{
   bool _isLoading=false;
   String? _errorMessage;
   List<SearchResultWeatherModel> _searchResults=[];
+   final List<SearchResultWeatherModel> _recentCities=[];
 
   bool get isLoading=>_isLoading;
   String? get errorMessage=>_errorMessage;
   List<SearchResultWeatherModel> get searchResults=>_searchResults;
+  List<SearchResultWeatherModel> get recentCities=>_recentCities;
 
   Future<void> searchCity(String query)async{
     if(query.trim().isEmpty){
@@ -70,5 +72,21 @@ Future<String?>fetchCurrentCityName()async{
       _isLoading = false;
       notifyListeners();
     }
+}
+
+void addToRecent(SearchResultWeatherModel city){
+  _recentCities.removeWhere((item)=>item.cityName==city.cityName && item.country ==city.country);
+
+  _recentCities.insert(0, city);
+
+  if(recentCities.length>5){
+    _recentCities.removeLast();
+  }
+  notifyListeners();
+
+}
+void removeFromRecent(SearchResultWeatherModel city){
+  _recentCities.remove(city);
+  notifyListeners();
 }
 }

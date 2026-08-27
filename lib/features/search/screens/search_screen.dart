@@ -25,43 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   
 
-  final List<RecentCity> _recentCities=const[
-  RecentCity(
-    name: 'Rome',
-    country: 'Italy · Lazio',
-    temperature: 19,
-    condition: 'Partly Cloudy',
-    imageUrl: 'assets/images/Rome.png'
-    ),
-    RecentCity(
-      name: 'London',
-      country: 'United Kingdom',
-      temperature: 14,
-      condition: 'Rainy',
-      imageUrl: 'assets/images/London.jpg'
-      ),
-      RecentCity(
-        name: 'Tokyo',
-        country: 'Japan',
-        temperature: 28,
-        condition: 'Mostly Clear',
-        imageUrl: 'assets/images/Tokyo.png'
-        ),
-        RecentCity(
-      name: 'Dubai',
-      country: 'United Arab Emirates',
-      temperature: 38,
-      condition: 'Sunny',
-      imageUrl: 'assets/images/Dubai.png',
-    ),
-    RecentCity(
-      name: 'New York',
-      country: 'United States',
-      temperature: 22,
-      condition: 'Cloudy',
-      imageUrl: 'assets/images/New_York.png'
-    ),
-  ];
+  
   @override
   void dispose() {
     _searchController.dispose();
@@ -157,6 +121,17 @@ class _SearchScreenState extends State<SearchScreen> {
                     }
                     );
                 }
+                if(searchProv.recentCities.isEmpty){
+                  return Center(
+                   child: Padding(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: Text(
+                      'No recent searches yet',
+                      style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+                    ),
+                    ),
+                  );
+                }
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -170,19 +145,19 @@ class _SearchScreenState extends State<SearchScreen> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context,index){
-                        final city=_recentCities[index];
+                        final city=searchProv.recentCities[index];
                         return RecentCityTile(
                           city: city, 
                           onTap: (){
-                            _searchController.text=city.name;
-                            context.read<SearchProvider>().searchCity(city.name);
+                            _searchController.text=city.cityName;
+                            context.read<SearchProvider>().searchCity(city.cityName);
                           }
                           );
                       },
                       separatorBuilder: (context,index)=>const SizedBox(height: 6,),
 
                   
-                      itemCount: _recentCities.length,
+                      itemCount: searchProv.recentCities.length,
                       )
                   ],
                 );
