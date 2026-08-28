@@ -146,7 +146,7 @@ class SearchResultWeatherModel{
     );
   }
 
-  // 2. لتحويل الكائن إلى Map لتخزينه في SharedPreferences
+  
   Map<String, dynamic> toJson() {
     return {
       'cityName': cityName,
@@ -162,7 +162,7 @@ class SearchResultWeatherModel{
     };
   }
 
-  // 3. لقراءة الكائن بعد استرجاعه من SharedPreferences
+  //to read the object after sharedPreference
   factory SearchResultWeatherModel.fromStoredJson(Map<String, dynamic> json) {
     return SearchResultWeatherModel(
       cityName: json['cityName'] ?? '',
