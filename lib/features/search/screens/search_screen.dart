@@ -18,13 +18,22 @@ class SearchScreen extends StatefulWidget {
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
+  
+
+
 
 
 class _SearchScreenState extends State<SearchScreen> {
   int _currentNavIndex = 1;
   final TextEditingController _searchController = TextEditingController();
   
-
+@override
+void initState(){
+  super.initState();
+WidgetsBinding.instance.addPostFrameCallback((_){
+context.read<SearchProvider>().loadRecentCities();
+});
+}
   
   @override
   void dispose() {
