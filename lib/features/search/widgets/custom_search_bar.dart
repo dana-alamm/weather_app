@@ -19,6 +19,7 @@ class CustomSearchBar extends StatefulWidget {
 class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
+    
     return Container(
   decoration: BoxDecoration(
     color:Colors.white.withOpacity(0.9),

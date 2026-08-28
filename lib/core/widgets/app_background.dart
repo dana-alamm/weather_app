@@ -15,7 +15,8 @@ class AppBackground extends StatelessWidget {
           center: const Alignment(1.0, -1.0),
           radius: 1.4,
           colors: isDark
-              ? const [Color(0xFF5A98FC), Color(0xFF2D3561)]
+              ? const [Color(0xFF28487D), 
+                  Color(0xFF0F1424),]
               : const [Color(0xFF5A98FC), Color(0xFFEEF3FB)],
           stops: const [0.0, 0.7],
         ),

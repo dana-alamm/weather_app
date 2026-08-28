@@ -64,7 +64,7 @@ class _SettingsCardState extends State<SettingsCard> {
                         setState(() {
                           _isDarkMode = val;
                         });
-                        // here is the switch
+                        // هنا يتم استدعاء دالة تغيير الثيم من الـ ThemeProvider
                       },
                     ),
                 ],

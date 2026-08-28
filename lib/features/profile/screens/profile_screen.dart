@@ -5,9 +5,11 @@ import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/core/widgets/user_avatar.dart';
+import 'package:weather_app/features/auth/screens/login_screen.dart';
 import 'package:weather_app/features/profile/widgets/preference_tile.dart';
 import 'package:weather_app/features/profile/widgets/profile_state_card.dart';
 import 'package:weather_app/features/profile/widgets/settings_card.dart';
+import 'package:weather_app/features/profile/widgets/sign_out_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -105,6 +107,20 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12,),
                 const SettingsCard(),
+                const SizedBox(height: 12,),
+                 SignOutButton(
+                  onTap: ()async{
+                    await FirebaseAuth.instance.signOut();
+
+                    if(!context.mounted)return;
+
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context)=>LoginScreen(),
+                      ),
+                        (route)=>false,
+                      );
+                  }
+                  ),
               ]
             )
             

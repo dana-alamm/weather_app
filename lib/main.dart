@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/core/providers/theme_provider.dart';
 import 'package:weather_app/core/services/shared_prefs_service.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 
@@ -22,6 +23,7 @@ void main() async{
   runApp(
    MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_)=>ThemeProvider()),
         ChangeNotifierProvider(create: (_) => WeatherProvider()),
         ChangeNotifierProvider(create: (_)=>SearchProvider()),
       ],
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeProvider=context.watch<ThemeProvider>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
