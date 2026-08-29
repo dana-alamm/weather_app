@@ -6,16 +6,14 @@ class ProfileStateCard extends StatelessWidget {
   final int checksCount;
   final int alertsCount; 
   const ProfileStateCard({super.key, 
-   this.citiesCount=12, 
-   this.checksCount=347, 
-   this.alertsCount=8});
+   this.citiesCount=0, 
+   this.checksCount=0, 
+   this.alertsCount=0});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-  // padding: const EdgeInsets.symmetric(vertical: 15),
-  // margin: const EdgeInsets.symmetric(horizontal: 16),
-  //     padding: const EdgeInsets.symmetric(vertical: 12),
+  
   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
   decoration: BoxDecoration(
     color:Colors.white,

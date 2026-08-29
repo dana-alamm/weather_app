@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/core/services/api_services.dart';
@@ -13,7 +14,11 @@ class SearchProvider extends ChangeNotifier {
   String? _errorMessage;
   List<SearchResultWeatherModel> _searchResults = [];
 
-  static const String _recentKey = 'recent_search_cities';
+  //static const String _recentKey = 'recent_search_cities';
+  String get _recentKey {
+    final uid = FirebaseAuth.instance.currentUser?.uid ?? 'guest';
+    return 'recent_search_$uid';
+  }
   List<SearchResultWeatherModel> _recentCities = [];
 
   bool get isLoading => _isLoading;
