@@ -6,6 +6,7 @@ import 'package:weather_app/core/theme/text_styles.dart';
 
 
 class ForecastDayTile extends StatelessWidget {
+
   final DailyWeatherModel forecast;
   const ForecastDayTile({super.key, required this.forecast});
 
@@ -22,10 +23,12 @@ class ForecastDayTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        //color: Colors.white,
+        color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -35,7 +38,9 @@ class ForecastDayTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(forecast.dayName, style: TextStyles.dayName),
+                Text(forecast.dayName, style: TextStyles.dayName.copyWith(
+                  color:isDark?Colors.white:Colors.black,
+                )),
                 SizedBox(height: 2),
                 Text(forecast.FormattedDate, style: TextStyles.subHeading),
               ],

@@ -56,7 +56,8 @@ class MainForcastCard extends StatelessWidget {
               Text(
                  '${weather.temp.round()}°',
                 style: TextStyles.temperatureNum.copyWith(
-                  fontSize: 34
+                  fontSize: 34,
+                  color: isDark?Colors.white:Colors.black
                 ),
               ),
               const SizedBox(height: 4,),
