@@ -1,6 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
@@ -16,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //int _currentNavBarIndex=3;
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     final user=FirebaseAuth.instance.currentUser;
     final rawEmailName=user?.email?.split('@').first ??'User';
     final userName=(user?.displayName !=null && user!.displayName!.isNotEmpty)
@@ -48,6 +49,7 @@ class ProfileScreen extends StatelessWidget {
                   userName,
                   style: TextStyles.userNameStyle.copyWith(
                     fontSize: 35,
+                    color: isDark?Colors.white:Colors.black
                   ),
                 ),
                 const SizedBox(height: 4,),
@@ -64,7 +66,9 @@ class ProfileScreen extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'PREFERENCES',
-                    style: TextStyles.staticWord,),
+                    style: TextStyles.staticWord.copyWith(
+                      color:isDark?Colors.grey:AppColors.circleShape2
+                    ),),
                 ),
                 const SizedBox(height: 12,),
                 Container(

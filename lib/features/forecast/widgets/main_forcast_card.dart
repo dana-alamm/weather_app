@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_app/core/models/weather_model.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/features/home/widgets/hourly_forecast_card.dart';
 
 class MainForcastCard extends StatelessWidget {
-  final int temperature;
-  final String condition;
-  final double maxTemp;
-  final double minTemp;
-  final String? dateText;
-  final String iconPath;
-  const MainForcastCard({
-    super.key, 
-    this.temperature=11, 
-   this.condition = 'Moderate Rain',
-    this.maxTemp = 13.7,
-    this.minTemp = 9.9,
-    this.dateText,
-    this.iconPath = 'assets/images/🌧.png',
-    });
+   
+   final CurrentWeatherModel weather;
+   final List<HourlyWeatherModel>hourly;
+   const MainForcastCard({super.key, required this.weather, required this.hourly,});
 
   @override
   Widget build(BuildContext context) {
-   final formattedDate=dateText ?? DateFormat('EEE d MMM').format(DateTime.now());
+    final isDark=Theme.of(context).brightness==Brightness.dark;
+  final formattedDate= DateFormat('EEE d MMM').format(DateTime.now());
+
+   final maxTemp=hourly.isNotEmpty
+      ? hourly.map((e) => e.temp).reduce((a, b) => a > b ? a : b)
+        : weather.temp;
+
+    final minTemp =hourly.isNotEmpty
+        ? hourly.map((e) => e.temp).reduce((a, b) => a < b ? a : b)
+        : weather.temp;
+
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
       decoration: BoxDecoration(
-        color:Colors.white,
+        //color:Colors.white,
+        color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(16),
 
       ),
@@ -34,7 +38,7 @@ class MainForcastCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
         Image.asset(
-          iconPath,
+          weather.assetIcon,
           width: 58,
             height: 58,
             errorBuilder: (context, error, stackTrace) => const Icon(
@@ -50,14 +54,14 @@ class MainForcastCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '$temperature°',
+                 '${weather.temp.round()}°',
                 style: TextStyles.temperatureNum.copyWith(
                   fontSize: 34
                 ),
               ),
               const SizedBox(height: 4,),
               Text(
-                condition,
+                weather.condition,
                 style: TextStyles.subHeading,
               ),
               const SizedBox(height: 4,),
@@ -69,7 +73,7 @@ class MainForcastCard extends StatelessWidget {
                       color: Color(0xFF94A3B8),
                     ),
                     Text(
-                      ' $maxTemp° ',
+                      ' ${maxTemp.round()}° ',
                       style: const TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 12,
@@ -83,7 +87,7 @@ class MainForcastCard extends StatelessWidget {
                       color: Color(0xFF94A3B8),
                     ),
                     Text(
-                      ' $minTemp°',
+                     '${minTemp.round()}°',
                       style: const TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 12,

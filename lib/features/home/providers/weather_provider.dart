@@ -27,7 +27,7 @@ class WeatherProvider extends ChangeNotifier {
     double targetLat;
     double targetLon;
 
-    // إذا تم تمرير إحداثيات (من البحث) نستخدمها، وإلا نجلب الموقع الحالي للجهاز
+
     if (lat != null && lon != null) {
       targetLat = lat;
       targetLon = lon;

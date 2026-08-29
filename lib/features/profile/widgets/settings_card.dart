@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/core/providers/theme_provider.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class SettingsCard extends StatefulWidget {
@@ -27,7 +28,7 @@ class _SettingsCardState extends State<SettingsCard> {
         'SETTINGS',
         style: TextStyles.staticWord.copyWith(
           color:isDark?
-          const Color(0xFF8E9BB5) : const Color(0xFF64748B),
+          Colors.grey:AppColors.circleShape2,
         ),
       ),
       const SizedBox(height: 12,),

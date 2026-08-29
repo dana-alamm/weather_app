@@ -11,6 +11,7 @@ class ForecastHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     final cityName = context.watch<WeatherProvider>().cityName;
 
     final user=FirebaseAuth.instance.currentUser;
@@ -46,7 +47,9 @@ class ForecastHeader extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 '7-Day Forecast',
-                style: TextStyles.Heading1,
+                style: TextStyles.Heading1.copyWith(
+                  color:isDark?Colors.white:Colors.black,
+                ),
               ),
             ],
           ),
