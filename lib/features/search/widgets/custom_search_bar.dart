@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 
 class CustomSearchBar extends StatefulWidget {
   final TextEditingController controller;
@@ -19,12 +20,15 @@ class CustomSearchBar extends StatefulWidget {
 class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
-    
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
   decoration: BoxDecoration(
-    color:Colors.white.withOpacity(0.9),
+    //color:Colors.white.withOpacity(0.9),
+    color:isDark?AppColors.darkCardBg:Colors.white.withOpacity(0.9),
     borderRadius: BorderRadius.circular(16),
-
+border: Border.all(
+          color: isDark ? Colors.white.withOpacity(0.06) : Colors.transparent,
+        ),
   ),
   child: TextField(
     controller: widget.controller,
@@ -37,7 +41,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     style: TextStyle(
       fontFamily: 'Inter',
       fontSize: 15,
-      color:Colors.black87
+      //color:Colors.black87
+      color: isDark ? Colors.white : Colors.black87,
     ),
     decoration: InputDecoration(
       hintText: 'Find your city',

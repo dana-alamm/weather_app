@@ -6,6 +6,7 @@ class SearchHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(top:20),
       child: Column(
@@ -13,7 +14,9 @@ class SearchHeader extends StatelessWidget {
         children: [
           Text(
             'Find a city.',
-            style: TextStyles.Heading1,
+            style: TextStyles.Heading1.copyWith(
+              color:isDark?Colors.white:Colors.black,
+            ),
 
           ),
           const SizedBox(height: 6,),

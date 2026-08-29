@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
@@ -38,7 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
@@ -104,12 +105,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     }
                     if (_searchController.text.trim().isNotEmpty) {
                       if (searchProv.searchResults.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: Padding(
-                            padding: EdgeInsets.only(top: 40),
+                            padding: const EdgeInsets.only(top: 40),
                             child: Text(
                               'No matching cities found.',
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color:isDark?Colors.white :Colors.black),
                             ),
                           ),
                         );
@@ -148,7 +150,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Text(
                             'No recent searches yet',
                             style: TextStyle(
-                              color: Colors.grey.shade500,
+                             // color: Colors.grey.shade500,
+                              color:isDark?Colors.white :Colors.black,
                               fontSize: 14,
                             ),
                           ),
@@ -158,7 +161,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('RECENT', style: TextStyles.staticWord),
+                        Text('RECENT', style: TextStyles.staticWord.copyWith(
+                          color:isDark?Colors.grey:AppColors.circleShape2,
+                        )),
                         const SizedBox(height: 12),
                         ListView.separated(
                           shrinkWrap: true,
