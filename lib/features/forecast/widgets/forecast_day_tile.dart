@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/models/weather_model.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
-class DailyForeCast {
-  final String dayName;
-  final String dateText;
-  final String condition;
-  final int minTemp;
-  final int maxTemp;
-  final String iconPath;
-  final Color barColor;
-  const DailyForeCast({
-    required this.dayName,
-    required this.dateText,
-    required this.condition,
-    required this.minTemp,
-    required this.maxTemp,
-    required this.iconPath,
-    this.barColor = const Color(0xFF60A5FA),
-  });
-}
+
 
 class ForecastDayTile extends StatelessWidget {
-  final DailyForeCast forecast;
+  final DailyWeatherModel forecast;
   const ForecastDayTile({super.key, required this.forecast});
+
+  Color _getBarColor(double temp){
+    if(temp<=15){
+      return AppColors.circleShape1;
+    }else if(temp<=12){
+   return Color(0xFF60A5FA);
+    }else{
+      return const Color(0xFFFBBF24);
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +37,13 @@ class ForecastDayTile extends StatelessWidget {
               children: [
                 Text(forecast.dayName, style: TextStyles.dayName),
                 SizedBox(height: 2),
-                Text(forecast.dateText, style: TextStyles.subHeading),
+                Text(forecast.FormattedDate, style: TextStyles.subHeading),
               ],
             ),
           ),
           const SizedBox(width: 8),
           Image.asset(
-            forecast.iconPath,
+            forecast.assetIcon,
             width: 38,
             height: 38,
             errorBuilder: (context, error, stackTrace) => const Icon(
@@ -68,7 +64,7 @@ class ForecastDayTile extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("${forecast.minTemp}°", 
+              Text("${forecast.minTemp.round()}°", 
               style: TextStyles.subHeading
               ),
               const SizedBox(width: 8,),
@@ -76,13 +72,13 @@ class ForecastDayTile extends StatelessWidget {
                 width: 36,
                 height: 5,
                 decoration: BoxDecoration(
-                  color: forecast.barColor,
+                 color:_getBarColor((forecast.minTemp+forecast.maxTemp)/2),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
               const SizedBox(width: 8),
               Text(
-                "${forecast.maxTemp}°",
+                "${forecast.maxTemp.round()}°",
                 style: TextStyles.subHeading,
               )
             ],

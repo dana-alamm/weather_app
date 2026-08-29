@@ -83,5 +83,26 @@ return rawList
    
   }
 
+  Future<List<DailyWeatherModel>>getDailyForcast({
+    required double lat,
+    required double lon,
+
+  })async{
+  final response=await _apiClient.get(
+    ApiConstants.daily,
+    queryParameters: {
+      'lat':lat,
+      'lon':lon,
+      'units': 'metric',
+      'appid': ApiConstants.apiKey,
+    },
+  );
+  final List dataList=response['data']??[];
+   return dataList
+   .skip(1)
+   .map((item)=>DailyWeatherModel.fromJson(item as Map<String,dynamic>))
+   .toList();
+  }
+
   
 }

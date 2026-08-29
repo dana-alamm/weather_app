@@ -9,6 +9,7 @@ class WeatherProvider extends ChangeNotifier {
   final ApiServices _apiServices=ApiServices();
   CurrentWeatherModel? currentWeather;
   List<HourlyWeatherModel> hourlyList=[];
+  List<DailyWeatherModel>dailyList=[];
   bool isLoading=false;
   String? errorMessage;
 
@@ -44,10 +45,12 @@ class WeatherProvider extends ChangeNotifier {
     final results = await Future.wait([
       _apiServices.getCurrentWeather(lat: targetLat, lon: targetLon),
       _apiServices.getHourlyForecast(lat: targetLat, lon: targetLon),
+      _apiServices.getDailyForcast(lat: targetLat, lon: targetLon),
     ]);
 
     currentWeather = results[0] as CurrentWeatherModel;
     hourlyList = results[1] as List<HourlyWeatherModel>;
+    dailyList=results[2]as List<DailyWeatherModel>;
   } catch (e) {
     errorMessage = e.toString();
   } finally {
