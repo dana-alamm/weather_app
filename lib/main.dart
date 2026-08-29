@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/core/providers/theme_provider.dart';
 import 'package:weather_app/core/services/shared_prefs_service.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
+import 'package:weather_app/features/auth/screens/auth_gate.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
        
       //   colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       // ),
-      home: isLoggedIn?const HomeScreen() :const WelcomeScreen(),
+      //home: isLoggedIn?const HomeScreen() :const WelcomeScreen(),
+      home:const AuthGate(),
     );
   }
 }
