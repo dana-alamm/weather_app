@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Scaffold(
       body: AppBackground(
         child: LayoutBuilder(
@@ -52,18 +53,25 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text(
                               'Sign in to your\n Account',
-                              style: TextStyles.Heading1,
+                              style: TextStyles.Heading1.copyWith(
+                                color:isDark?Colors.white:Colors.black,
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               'Enter your email and password to log in ',
-                              style: TextStyles.subHeading,
+                              style: TextStyles.subHeading.copyWith(
+                                color: isDark
+                                    ? const Color(0xFF94A3B8)
+                                    : AppColors.GreyColor,
+                              ),
                             ),
                             const SizedBox(height: 32),
                     
                             CustomTextField(
                               controller: emailController,
                               hintText: 'Enter your email',
+                              
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
@@ -100,7 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _obscurePassword
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
-                                  color: Colors.grey,
+                                  color: isDark
+                                      ? const Color(0xFF94A3B8)
+                                      : Colors.grey,
                                   size: 20,
                                 ),
                               ),
@@ -117,9 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    side: const BorderSide(
-                                      color: AppColors.GreyColor,
+                                    side: BorderSide(
+                                      color: isDark
+                                          ? const Color(0xFF64748B)
+                                          : AppColors.GreyColor,
                                     ),
+                                   
                                     activeColor: const Color(0xFF2E6FF2),
                                     onChanged: (val) {
                                       setState(() {
@@ -129,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                const Text(
+                                 Text(
                                   'Remember me',
                                   style: TextStyle(
                                     fontFamily: 'Inter',
@@ -137,7 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontSize: 12,
                                     height: 1.5,
                                     letterSpacing: -0.32,
-                                    color: AppColors.GreyColor,
+                                   // color: AppColors.GreyColor,
+                                   color: isDark
+                                        ? const Color(0xFFCBD5E1)
+                                        : AppColors.GreyColor,
                                   ),
                                 ),
                                 const Spacer(),
@@ -250,7 +266,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 Expanded(
                                   child: Divider(
-                                    color: AppColors.GreyColor,
+                                    //color: AppColors.GreyColor,
+                                    color: isDark
+                                        ? Colors.white.withOpacity(0.12)
+                                        : AppColors.GreyColor.withOpacity(0.4),
                                     thickness: 1,
                                   ),
                                 ),
@@ -262,7 +281,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     'Or',
                                     style: TextStyle(
                                       fontFamily: 'Inter',
-                                      color: AppColors.GreyColor,
+                                     // color: AppColors.GreyColor,
+                                     color: isDark
+                                          ? const Color(0xFF94A3B8)
+                                          : AppColors.GreyColor,
                                       fontSize: 12,
                                       height: 1.5,
                                       letterSpacing: -0.32,
@@ -311,7 +333,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     );
                                   }
                                 }
-                              },
+                              }, isDark: isDark,
                             ),
                             const SizedBox(height: 14),
                             _buildSocialButton(
@@ -321,7 +343,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Color(0xFF1877F2),
                                 size: 22,
                               ),
-                              onTap: () {},
+                              onTap: () {}, isDark: isDark,
                             ),
                           ],
                         ),
@@ -330,7 +352,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
+                              Text(
                                 'Don\'t have an account?',
                                 style: TextStyle(
                                   fontFamily: 'Inter',
@@ -338,7 +360,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontSize: 12,
                                   height: 1.4,
                                   letterSpacing: -0.32,
-                                  color: AppColors.GreyColor,
+                                 // color: AppColors.GreyColor,
+                                 color: isDark
+                                      ? const Color(0xFF94A3B8)
+                                      : AppColors.GreyColor,
                                 ),
                               ),
                               GestureDetector(
@@ -378,6 +403,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
  
   Widget _buildSocialButton({
+    required bool isDark,
     required String text,
     required Widget icon,
     required VoidCallback onTap,
@@ -386,7 +412,8 @@ class _LoginScreenState extends State<LoginScreen> {
       height: 52,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        //color: Colors.white,
+        color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
@@ -412,7 +439,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 1.4,
                 fontWeight: FontWeight.w600,
                 letterSpacing: -0.32,
-                color: Colors.black,
+                color: isDark?Colors.white:Colors.black,
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -28,9 +29,10 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color:isDark?AppColors.darkCardBg: Colors.white,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
@@ -47,11 +49,11 @@ class CustomTextField extends StatelessWidget {
         onTap: onTap,
         keyboardType: keyboardType,
         validator: validator,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14.0,
           fontWeight: FontWeight.w400,
           letterSpacing: -0.32,
-          color: Colors.black,
+          color: isDark?Colors.white:Colors.black,
         ),
         decoration: InputDecoration(
           hintText: hintText,

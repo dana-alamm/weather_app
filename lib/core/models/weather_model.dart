@@ -56,9 +56,11 @@ class CurrentWeatherModel{
      windSpeed: (dataItem['wind_speed'] as num?)?.toDouble() ?? 0.0,
       pressure: (dataItem['pressure'] as num?)?.toInt() ?? 0,
       visibility: (dataItem['visibility'] as num?)?.toInt() ?? 0,
+      rainAmount: rain,
     );
   }
 }
+
 class HourlyWeatherModel{
   final DateTime time;
   final double temp;
