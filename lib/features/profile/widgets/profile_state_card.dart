@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class ProfileStateCard extends StatelessWidget {
@@ -12,28 +13,31 @@ class ProfileStateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
   
   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
   decoration: BoxDecoration(
-    color:Colors.white,
+    //color:Colors.white,
+    color:isDark?AppColors.darkCardBg:Colors.white,
     borderRadius: BorderRadius.circular(16),
   ),
   child: IntrinsicHeight(
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-    Expanded(child: _buildStateItem('$citiesCount', 'CITIES')),
+    Expanded(child: _buildStateItem('$citiesCount', 'CITIES',isDark)),
             _buildFullLine(),
-            Expanded(child: _buildStateItem('$checksCount', 'CHECKS')),
+            Expanded(child: _buildStateItem('$checksCount', 'CHECKS',isDark)),
             _buildFullLine(),
-            Expanded(child: _buildStateItem('$alertsCount', 'ALERTS')),
+            Expanded(child: _buildStateItem('$alertsCount', 'ALERTS',isDark)),
       ],
     ),
   ),
     );
   }
-  Widget _buildStateItem(String value,String label){
+  Widget _buildStateItem(String value,String label,bool isDark){
+    
     return Container(
       width: 50,
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -42,7 +46,9 @@ class ProfileStateCard extends StatelessWidget {
         children: [
           Text(
             value,
-            style: TextStyles.valueProfile,
+            style: TextStyles.valueProfile.copyWith(
+              color: isDark?Colors.white:Colors.black,
+            ),
           ),
           const SizedBox(height: 4,),
           Text(

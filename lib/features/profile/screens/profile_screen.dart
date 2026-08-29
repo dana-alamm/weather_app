@@ -105,7 +105,8 @@ Future<Map<String,int>>_getUserStats()=>UserStatsService().getAllStats();
                 const SizedBox(height: 12,),
                 Container(
                   decoration: BoxDecoration(
-                    color:Colors.white,
+                    //color:Colors.white,
+                    color:isDark?AppColors.darkCardBg:Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     
                   ),

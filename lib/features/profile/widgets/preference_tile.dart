@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 
 class PreferenceTile extends StatelessWidget {
   final String iconEmoji;
@@ -18,6 +19,7 @@ class PreferenceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Column(
    children: [
     InkWell(
@@ -31,7 +33,8 @@ class PreferenceTile extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                    color: const Color(0xFFF0F6FD),
+                   // color: const Color(0xFFF0F6FD),
+                   color:isDark?AppColors.darkCardBg:Colors.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   alignment: Alignment.center,
@@ -45,10 +48,10 @@ class PreferenceTile extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
+                style:  TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF1E293B),
+                      color: isDark?Colors.white:  Color(0xFF1E293B),
                     ),
 
                 ),
@@ -56,17 +59,17 @@ class PreferenceTile extends StatelessWidget {
             ),
             Text(
                   value,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF64748B),
+                    color:isDark? Colors.grey: Color(0xFF64748B),
                   ),
                 ),
                 const SizedBox(width: 8,),
-                const Icon(
+                 Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: 13,
-                  color: Color(0xFF94A3B8),
+                  color: isDark?Colors.white :Color(0xFF94A3B8),
                 ),
           ],
         ),
