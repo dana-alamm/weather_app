@@ -21,6 +21,28 @@ class HourlyForecastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
+
+    final Color cardBg=isDark
+    ?(isSelected ?const Color(0xFF263352) : AppColors.darkCardBg)
+    :(isSelected ? const Color(0xFFDCE8FD) : Colors.white.withOpacity(0.9));
+
+    final Border? cardBorder = isSelected
+        ? Border.all(
+            color: isDark ? const Color(0xFF4A80F0) : const Color(0xFF4A80F0),
+            width: 1.5,
+          )
+        : (isDark
+            ? Border.all(color: Colors.white.withOpacity(0.04), width: 1)
+            : null);
+
+            final Color timeColor = isSelected
+        ? (isDark ? const Color(0xFF7FACFA) : AppColors.circleShape2)
+        : (isDark ? const Color(0xFF8E9BB5) : Colors.grey);
+        
+        final Color rainColor = isSelected
+        ? (isDark ? AppColors.circleShape1 : const Color(0xFF4A80F0))
+        : (isDark ? const Color(0xFF8E9BB5) : const Color(0xFF4A80F0));
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -28,13 +50,12 @@ class HourlyForecastCard extends StatelessWidget {
         width: 70,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 6),
         decoration: BoxDecoration(
-          color: isSelected
-              ? const Color(0xFFDCE8FD)
-              : Colors.white.withOpacity(0.9),
+          // color: isSelected
+          //     ? const Color(0xFFDCE8FD)
+          //     : Colors.white.withOpacity(0.9),
+          color:cardBg,
           borderRadius: BorderRadius.circular(16),
-          border: isSelected
-              ? Border.all(color: const Color(0xFF4A80F0), width: 1.5)
-              : null,
+         border: cardBorder,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,9 +63,8 @@ class HourlyForecastCard extends StatelessWidget {
             Text(
               time,
               style: TextStyles.timeStyle.copyWith(
-                color:isSelected
-                ? AppColors.circleShape2
-                : Colors.grey
+               color:timeColor,
+               fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
       
               ),
             ),
@@ -61,18 +81,18 @@ class HourlyForecastCard extends StatelessWidget {
             ),
             Text(
               temp,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF1E293B),
+                color:isDark?Colors.white :Color(0xFF1E293B),
               ),
             ),
             Text(
               rainProbability,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF4A80F0),
+                color: rainColor,
               ),
             ),
           ],

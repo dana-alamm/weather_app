@@ -21,20 +21,35 @@ class UserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle,
       boxShadow: [
           BoxShadow(
-            color: backgroundColor.withOpacity(0.35),
+           // color: backgroundColor.withOpacity(0.35),
+           color:isDark
+           ?const Color(0xFF6EA8FE).withOpacity(0.3)
+                : backgroundColor.withOpacity(0.35),
             blurRadius: 16,
             spreadRadius: 2,
             offset: const Offset(0, 6),
           ),
         ],
          gradient: LinearGradient(
-                colors: [
+                // colors: [
+                //   AppColors.circleShape1,
+                //   AppColors.circleShape2,
+                // ],
+                begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? const [
+                  Color(0xFF6EA8FE), 
+                  Color(0xFF9EAAFE), 
+                ]
+              : const [
                   AppColors.circleShape1,
                   AppColors.circleShape2,
                 ],

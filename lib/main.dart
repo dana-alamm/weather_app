@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/core/providers/theme_provider.dart';
 import 'package:weather_app/core/services/shared_prefs_service.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -42,11 +43,14 @@ class MyApp extends StatelessWidget {
     final themeProvider=context.watch<ThemeProvider>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
+      title: 'Weather App',
+      themeMode: context.watch<ThemeProvider>().currentTheme,
+      theme: AppColors.lightTheme,
+      darkTheme: AppColors.darkTheme,
+      // theme: ThemeData(
        
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
+      //   colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+      // ),
       home: isLoggedIn?const HomeScreen() :const WelcomeScreen(),
     );
   }

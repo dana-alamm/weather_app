@@ -9,11 +9,14 @@ class WeatherDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     final visibilityKm = (weather.visibility / 1000).toStringAsFixed(1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Details', style: TextStyles.staticWord),
+        Text('Details', style: TextStyles.staticWord.copyWith(
+          color:isDark?Colors.grey:Colors.black,
+        )),
         SizedBox(height: 12),
         GridView.count(
           crossAxisCount: 2,

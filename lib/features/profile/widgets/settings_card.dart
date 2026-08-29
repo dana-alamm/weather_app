@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/core/providers/theme_provider.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class SettingsCard extends StatefulWidget {
@@ -13,18 +15,30 @@ class _SettingsCardState extends State<SettingsCard> {
   bool _isDarkMode=false;
   @override
   Widget build(BuildContext context) {
+    return Consumer<ThemeProvider>(
+      builder: (context,themeProv,_){
+        final isDark=themeProv.isDarkMode;
+    
+  
     return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         'SETTINGS',
-        style: TextStyles.staticWord,
+        style: TextStyles.staticWord.copyWith(
+          color:isDark?
+          const Color(0xFF8E9BB5) : const Color(0xFF64748B),
+        ),
       ),
       const SizedBox(height: 12,),
       Container(
         decoration: BoxDecoration(
-          color:Colors.white,
+          //color:Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+                  color: isDark ? Colors.white.withOpacity(0.08) : Colors.transparent,
+                ),
 
         ),
         child: Column(
@@ -36,7 +50,8 @@ class _SettingsCardState extends State<SettingsCard> {
                   Container(
                     padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                      //  color: Colors.white,
+                      color: isDark ? const Color(0x1AFFFFFF) : const Color(0xFFF1F5F9),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Icon(
@@ -47,36 +62,34 @@ class _SettingsCardState extends State<SettingsCard> {
                       
                   ),
                   const SizedBox(width: 14),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Dark Mode',
+                        isDark? 'Dark Mode':'Light Mode',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF1E293B),
+                          //color: Color(0xFF1E293B),
+                          color: isDark ? Colors.white : const Color(0xFF1E293B),
                         ),
                       ),
                     ),
                     CupertinoSwitch(
-                      value: _isDarkMode,
+                      value: isDark,
                       activeColor: const Color(0xFF4A90E2),
                       onChanged: (val) {
-                        setState(() {
-                          _isDarkMode = val;
-                        });
-                        // هنا يتم استدعاء دالة تغيير الثيم من الـ ThemeProvider
-                      },
+                      themeProv.toggleTheme(val);
+                       
+                     },
+                        ),
+                      ],
                     ),
+                  ),
                 ],
-              ),),
-              
-              
-              
-              
+              ),
+            ),
           ],
-        ),
-      )
-    ],
+        );
+      },
     );
   }
 }

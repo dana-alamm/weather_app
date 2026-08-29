@@ -12,6 +12,7 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     final user=FirebaseAuth.instance.currentUser;
       final String rawEmailName=user?.email?.split('@').first ??'User';
     final String userName=(user?.displayName !=null && user!.displayName!.isNotEmpty)
@@ -30,7 +31,12 @@ class HomeHeader extends StatelessWidget {
               children: [
                 Text(
                   DateFormat('EEEE,d MMMM yyyy').format(DateTime.now()),
-                  style: TextStyles.dateStyle,
+                  style: TextStyles.dateStyle.copyWith(
+                    color: isDark?
+                    Colors.grey
+                    :AppColors.thirdBlue,
+                  ),
+                  
                 ),
                 const SizedBox(height: 4),
                 Row(
@@ -56,7 +62,11 @@ class HomeHeader extends StatelessWidget {
                         }
                         return Text(
                           weatherProvider.cityName,
-                          style: TextStyles.cityNameStyle,
+                          style: TextStyles.cityNameStyle.copyWith(
+                            color: isDark?
+                            Colors.white
+                            : Colors.black
+                          ),
                         );
                       },
                     ),

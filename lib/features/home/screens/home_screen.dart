@@ -136,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
@@ -202,13 +203,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (provider.currentWeather != null)
                       WeatherDetailsSection(weather: provider.currentWeather!),
                     const SizedBox(height: 20),
-                    Text('SUN', style: TextStyles.staticWord),
+                    Text('SUN', style: TextStyles.staticWord.copyWith(
+                      color:isDark?Colors.grey:Colors.black
+                    )),
                     SizedBox(height: 12),
                     SunCard(
                      
                     ),
                     const SizedBox(height: 20),
-                    Text('PRECIPITATION', style: TextStyles.staticWord),
+                    Text('PRECIPITATION', style: TextStyles.staticWord.copyWith(
+                         color:isDark?Colors.grey:Colors.black
+                    )),
                     SizedBox(height: 12),
                     PrecipitationCard(
                       hourly:provider.hourlyList,

@@ -17,7 +17,7 @@ class AppColors {
 
   static const Color blueAccent = Color(0xFF4A90E2);
   static const Color skyBlue = Color(0xFF5A98FC);
-  static const Color darkCardBg = Color(0xFF1C223A);
+  static const Color darkCardBg =Color(0xFF232B42);
 static const Color darkTextPrimary = Colors.white;
   static const Color darkTextSecondary = Color(0xFF8E9BB5);
 

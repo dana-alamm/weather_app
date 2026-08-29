@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:weather_app/core/models/weather_model.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 
@@ -12,6 +13,7 @@ final List<HourlyWeatherModel>hourly;
 
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
    final items = hourly.take(6).toList();
    if (items.isEmpty) {
       return const SizedBox.shrink();
@@ -19,7 +21,8 @@ final List<HourlyWeatherModel>hourly;
     return Container(
    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
    decoration: BoxDecoration(
-        color: Colors.white,
+       // color: Colors.white,
+       color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
@@ -56,7 +59,7 @@ final List<HourlyWeatherModel>hourly;
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w500,
-            color: Colors.grey.shade500,
+           // color: Colors.grey.shade500,
           ),
         ),
         const SizedBox(height: 12),

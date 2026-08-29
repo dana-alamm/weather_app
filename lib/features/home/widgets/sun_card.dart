@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class SunCard extends StatelessWidget {
@@ -18,11 +19,12 @@ class SunCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color:Colors.white,
+        //color:Colors.white,
+        color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(16),
 
       ),
@@ -42,7 +44,9 @@ class SunCard extends StatelessWidget {
               const SizedBox(width: 8,),
               Text(
                 'SUNRISE & SUNSET',
-                style: TextStyles.unitStyle,
+                style: TextStyles.unitStyle.copyWith(
+                  color:isDark?Colors.grey:Colors.black,
+                ),
               )
             ],
           ),
@@ -58,16 +62,17 @@ class SunCard extends StatelessWidget {
   Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildTimeColumn('SUNRISE', sunrise),
-              _buildTimeColumn('NOW', now, isHighlighted: true),
-              _buildTimeColumn('SUNSET', sunset),
+              _buildTimeColumn('SUNRISE', sunrise, isDark: isDark),
+              _buildTimeColumn('NOW', now, isHighlighted: true, isDark: isDark),
+              _buildTimeColumn('SUNSET', sunset, isDark: isDark),
             ],
           ),
         ],
       ),
     );
   }
-  Widget _buildTimeColumn(String label, String time, {bool isHighlighted = false}) {
+  Widget _buildTimeColumn(String label, String time, {required bool isDark, isHighlighted = false}) {
+    
     return Column(
       children: [
         Text(
@@ -75,7 +80,7 @@ class SunCard extends StatelessWidget {
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade400,
+            color: isDark?Colors.grey:Colors.grey.shade400,
           ),
         ),
         const SizedBox(height: 4),
@@ -84,7 +89,9 @@ class SunCard extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: isHighlighted ? const Color(0xFF1E293B) : const Color(0xFF475569),
+            color: isHighlighted
+                ? (isDark ? Colors.white : const Color(0xFF1E293B))
+                : (isDark ? const Color(0xFFCBD5E1) : const Color(0xFF475569)),
           ),
         ),
       ],

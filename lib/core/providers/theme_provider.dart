@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/core/services/shared_prefs_service.dart';
 
 class ThemeProvider extends ChangeNotifier{
-  static const String _themeKey='is_dark_mode';//for sharedPrefs
-  ThemeMode _themeMode=ThemeMode.light;
-
-  ThemeMode get themeMode=>_themeMode;
-  bool get isDarkMode=>_themeMode==ThemeMode.dark;
+  static const String _themeKey='is_dark_mode';
+  bool _isDarkMode=false;
 
   ThemeProvider(){
-    loadTheme();
+    _loadThemeFromMemory();
   }
 
-  Future<void> loadTheme() async{
-    final prefs=await SharedPreferences.getInstance();
-    final isDark=prefs.getBool(_themeKey)??false;
-    _themeMode=isDark? ThemeMode.dark :ThemeMode.light;
-    notifyListeners();
+  bool get isDarkMode=>_isDarkMode;
 
-  }
-  Future<void> toggleTheme(bool isDark)async{
-    _themeMode=isDark?ThemeMode.dark:ThemeMode.light;
+  ThemeMode get currentTheme=>_isDarkMode?ThemeMode.dark:ThemeMode.light;
+
+  void toggleTheme([bool? value]){
+    _isDarkMode=value?? !_isDarkMode;
     notifyListeners();
-    final prefs=await SharedPreferences.getInstance();
-    await prefs.setBool(_themeKey, isDark);
+    SharedPrefsService.saveData(key: _themeKey, value: _isDarkMode);
+  }
+  void _loadThemeFromMemory()async{
+    _isDarkMode=SharedPrefsService.getData(key: _themeKey)as bool? ??false;
+    notifyListeners();
   }
 }

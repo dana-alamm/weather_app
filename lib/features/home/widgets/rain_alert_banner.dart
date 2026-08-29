@@ -1,77 +1,4 @@
 
-// import 'package:flutter/material.dart';
-// import 'package:weather_app/core/theme/app_colors.dart';
-
-// class RainAlertBanner extends StatelessWidget {
-//   final double? rainAmount;
-//   const RainAlertBanner({super.key, this.rainAmount});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     if(rainAmount==null||rainAmount==0){
-//       return const SizedBox.shrink();
-//     }
-//     return Container(
-//     width: double.infinity,
-//     padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 16),
-//     decoration: BoxDecoration(
-//       color:Colors.white,
-//       borderRadius: BorderRadius.circular(16),
-//       border: Border.all(
-//         color:AppColors.circleShape1,
-//         width: 1.5
-//       ),
-//     ),
-//     child: Row(
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       children: [
-//         Image.asset(
-//           'assets/images/span.alert-icon.png',
-//           width: 24,
-//           height: 24,
-//           errorBuilder: (context, error, stackTrace) => const Icon(
-//             Icons.beach_access_rounded,
-//             size: 22,
-//           ),
-//         ),
-//         const SizedBox(width: 14,),
-
-//         Expanded(
-//           child: RichText(
-//             text:TextSpan(
-//               style: const TextStyle(
-//                 fontFamily: 'Inter',
-//                 //fontWeight: FontWeight.w600,
-//                 fontSize: 13,
-//                 height: 1.0,
-//                // color:Colors.black,
-//               ),
-//               children: [
-//                 const TextSpan(
-//                   text:'Grab an umbrella. ',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w600,
-//                     color:Colors.black,
-
-//                   ),
-                  
-
-//                 ),
-//                 TextSpan(
-//                     text: 'Rain expected — ${rainAmount!.toStringAsFixed(2)} mm in the last hour.',
-//                     style: const TextStyle(
-//                       fontFamily: 'Inter',
-//                       color:AppColors.circleShape2,
-//                     )
-//                   ),
-//               ]
-//             ),)
-//         ),
-//       ],
-//     ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
@@ -84,6 +11,7 @@ class RainAlertBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final current = weather;
     if (weather==null) return const SizedBox.shrink();
+    final isDark=Theme.of(context).brightness==Brightness.dark;
 
     String title='';
     String description='';
@@ -117,16 +45,30 @@ class RainAlertBanner extends StatelessWidget {
      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        //color: Colors.white,
+        color: isDark ? AppColors.darkCardBg : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: AppColors.circleShape1,
+          //color: AppColors.circleShape1,
+          color: isDark
+              ? Colors.white.withOpacity(0.06)
+              : AppColors.circleShape1.withOpacity(0.5),
           width: 1.5,
         ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          if(isDark)
+          Container(
+            width: 7,
+              height: 7,
+              decoration: const BoxDecoration(
+                color: Color(0xFF60A5FA),
+                shape: BoxShape.circle,
+              ),
+          )
+          else
           Icon(
             iconData,
             size: 22,
@@ -136,24 +78,28 @@ class RainAlertBanner extends StatelessWidget {
           Expanded(
             child: RichText(
               text: TextSpan(
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Inter',
                   fontSize: 13,
                   height: 1.0,
+                  color: isDark? const Color(0xFFCBD5E1) : Colors.black87,
                 ),
                 children: [
                   TextSpan(
                     text: title,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                       color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
                   TextSpan(
                     text: description,
                     style: TextStyle(
                       fontFamily: 'Inter',
-                      color: AppColors.circleShape2,
+                     // color: AppColors.circleShape2,
+                     color: isDark
+                          ? const Color(0xFF94A3B8)
+                          : AppColors.circleShape2,
                     ),
                   ),
                 ],

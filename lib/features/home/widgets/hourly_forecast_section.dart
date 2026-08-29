@@ -19,13 +19,16 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
  
   @override
   Widget build(BuildContext context) {
+    final isDark=Theme.of(context).brightness==Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Hourly', style: TextStyles.staticWord),
+            Text('Hourly', style: TextStyles.staticWord.copyWith(
+            color:isDark?Colors.grey:Colors.black,
+            )),
             GestureDetector(
               onTap: () {},
               child: Text('7-day forecast', style: TextStyles.savenDaysForcast),
