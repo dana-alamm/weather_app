@@ -23,6 +23,8 @@ class ProfileScreen extends StatelessWidget {
     final userName=(user?.displayName !=null && user!.displayName!.isNotEmpty)
     ? user.displayName!
     :rawEmailName;
+
+    
     final userEmail=user?.email ??'No email';
     return Scaffold(
    backgroundColor: Colors.transparent,

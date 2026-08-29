@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/features/forecast/screens/forecast_screen.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_card.dart';
 
 class HourlyForecastSection extends StatefulWidget {
@@ -30,7 +31,10 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
             color:isDark?Colors.grey:Colors.black,
             )),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ForecastScreen()),
+                 (route)=>false);
+              },
               child: Text('7-day forecast', style: TextStyles.savenDaysForcast),
             ),
           ],
