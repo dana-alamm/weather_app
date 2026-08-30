@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
-class SunCard extends StatelessWidget {
+class SunCard extends StatefulWidget {
   final String sunrise;
   final String? now;
   final String sunset;
@@ -19,11 +20,64 @@ class SunCard extends StatelessWidget {
     this.progress = 0.65,});
 
   @override
+  State<SunCard> createState() => _SunCardState();
+}
+
+class _SunCardState extends State<SunCard> {
+  Timer? _timer;
+
+  @override
+  void initState(){
+super.initState();
+_timer=Timer.periodic(const Duration(minutes: 1), (timer){
+  if(mounted){
+    setState(() {
+      
+    });
+  }
+});
+
+  }
+  @override
+  void dispose(){
+    _timer?.cancel();
+    super.dispose();
+  }
+  // تحويل "07:13" إلى DateTime لليوم الحالي
+  DateTime _parseTime(String timeStr) {
+    final now = DateTime.now();
+    final parts = timeStr.split(':');
+    final hour = int.tryParse(parts[0]) ?? 0;
+    final minute = int.tryParse(parts[1]) ?? 0;
+    return DateTime(now.year, now.month, now.day, hour, minute);
+  }
+
+  // حساب نسبة حركة الشمس بين 0.0 و 1.0
+  double _calculateProgress(DateTime current, DateTime start, DateTime end) {
+    if (current.isBefore(start)) return 0.0;
+    if (current.isAfter(end)) return 1.0;
+
+    final totalSeconds = end.difference(start).inSeconds;
+    final elapsedSeconds = current.difference(start).inSeconds;
+
+    if (totalSeconds <= 0) return 0.0;
+    return (elapsedSeconds / totalSeconds).clamp(0.0, 1.0);
+  }
+  @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
 
     final currentDateTime=DateTime.now();
-    final currentNowStr=now??DateFormat('HH:mm').format(currentDateTime);
+    final currentNowStr=widget.now??DateFormat('HH:mm').format(currentDateTime);
+
+    // 2. حساب حركة الشمس ديناميكياً بين الشروق والغروب 👈 (هذا الجزء المضاف)
+  final sunriseDateTime = _parseTime(widget.sunrise);
+  final sunsetDateTime = _parseTime(widget.sunset);
+  final currentProgress = widget.progress != null
+      ? _calculateProgress(currentDateTime, sunriseDateTime, sunsetDateTime)
+      : widget.progress;
+
+    
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -59,22 +113,23 @@ class SunCard extends StatelessWidget {
             height: 90,
             width: double.infinity,
             child: CustomPaint(
-              painter: SunArcPainter(progress: progress),
+              painter: SunArcPainter(progress: currentProgress),
             ),
           ),
           const SizedBox(height: 20,),
   Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildTimeColumn('SUNRISE', sunrise, isDark: isDark),
+              _buildTimeColumn('SUNRISE', widget.sunrise, isDark: isDark),
               _buildTimeColumn('NOW', currentNowStr, isHighlighted: true, isDark: isDark),
-              _buildTimeColumn('SUNSET', sunset, isDark: isDark),
+              _buildTimeColumn('SUNSET', widget.sunset, isDark: isDark),
             ],
           ),
         ],
       ),
     );
   }
+
   Widget _buildTimeColumn(String label, String time, {required bool isDark, isHighlighted = false}) {
     
     return Column(
