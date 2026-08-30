@@ -166,9 +166,10 @@ class SunArcPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // draw the are
     final rect = Rect.fromCenter(
-      center: Offset(size.width / 2, size.height + 20),
+      center: Offset(size.width / 2, size.height + 10),
       width: size.width - 20,
-      height: (size.height + 20) * 1.6,
+      //height: (size.height + 10) * 1.8,
+      height: size.height * 1.3,
     );
 
     
