@@ -5,7 +5,7 @@ import 'package:weather_app/core/models/current_weather_model.dart';
 import 'package:weather_app/core/models/daily_weather_model.dart';
 import 'package:weather_app/core/models/hourly_weather_model.dart';
 import 'package:weather_app/core/models/search_result_weather_model.dart';
-import 'package:weather_app/core/models/weather_model.dart';
+
 
 class ApiServices {
   final DioHandler _apiClient=DioHandler();//to send HTTP  request

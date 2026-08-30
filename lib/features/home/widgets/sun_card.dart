@@ -13,9 +13,9 @@ class SunCard extends StatelessWidget {
   final double progress;
   const SunCard({
     super.key,
-    this.sunrise = '07:13',
+    required this.sunrise,
     this.now ,
-    this.sunset = '19:36',
+     required this.sunset ,
     this.progress = 0.65,});
 
   @override

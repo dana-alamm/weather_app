@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/models/current_weather_model.dart';
 import 'package:weather_app/core/models/daily_weather_model.dart';
 import 'package:weather_app/core/models/hourly_weather_model.dart';
-import 'package:weather_app/core/models/weather_model.dart';
+
 import 'package:weather_app/core/services/api_services.dart';
 import 'package:weather_app/core/services/location_service.dart';
 import 'package:weather_app/features/profile/services/user_stats_service.dart';

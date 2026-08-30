@@ -41,10 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
           bottom: false,
           child: Consumer<WeatherProvider>(
             builder: (context, provider, child) {
+              final weather=provider.currentWeather;
               if (provider.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(color: Colors.white),
                 );
+                
               }
 
               if (provider.errorMessage != null) {
@@ -104,7 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     )),
                     SizedBox(height: 12),
                     SunCard(
-                     
+                     sunrise: weather?.formattedSunRise??'6:00',
+                     sunset: weather?.formattedSunSet??'18:00',
                     ),
                     const SizedBox(height: 20),
                     Text('PRECIPITATION', style: TextStyles.staticWord.copyWith(
