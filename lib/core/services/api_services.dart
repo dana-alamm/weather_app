@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/api/dio_handler.dart';
 import 'package:weather_app/core/constants/api_constants.dart';
+import 'package:weather_app/core/models/current_weather_model.dart';
+import 'package:weather_app/core/models/daily_weather_model.dart';
+import 'package:weather_app/core/models/hourly_weather_model.dart';
+import 'package:weather_app/core/models/search_result_weather_model.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 
 class ApiServices {
-  final DioHandler _apiClient=DioHandler();
+  final DioHandler _apiClient=DioHandler();//to send HTTP  request
 
   Future<CurrentWeatherModel>getCurrentWeather({
     required double lat,
@@ -47,9 +51,9 @@ return rawList
   
   Future<List<SearchResultWeatherModel>> searchCityWithWeather(String query)async{
    final response=await _apiClient.get(
-    ApiConstants.directGeo,
+    ApiConstants.directGeo,//text--->lon and lat
     queryParameters: {
-      'q':query,
+      'q':query,//what the user type in search
       'limit':5,
       'appid': ApiConstants.apiKey,
     },
@@ -79,7 +83,7 @@ return rawList
    
    }).toList();
     
-    return await Future.wait(tasks);
+    return await Future.wait(tasks);//get all results at the same time
    
   }
 

@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
 //       'alerts': alerts,
 //     };
 // }
-Future<Map<String,int>>_getUserStats()=>UserStatsService().getAllStats();
+// Future<Map<String,int>>_getUserStats()=>UserStatsService().getAllStats();
   @override
   Widget build(BuildContext context) {
     
@@ -81,17 +81,17 @@ Future<Map<String,int>>_getUserStats()=>UserStatsService().getAllStats();
                 ),
                 const SizedBox( height: 35,),
 
-                FutureBuilder(
-                  future: _getUserStats(), 
-                  builder: (context,snapshot){
-                    final stats=snapshot.data??{'cities':0,'checks': 0, 'alerts': 0};
-                    return ProfileStateCard(
-                      citiesCount: stats['cities']!,
-                      checksCount: stats['checks']!,
-                      alertsCount: stats['alerts']!,
-                    );
-                  }
-                  ),
+                // FutureBuilder(
+                //   future: _getUserStats(), 
+                //   builder: (context,snapshot){
+                //     final stats=snapshot.data??{'cities':0,'checks': 0, 'alerts': 0};
+                //     return ProfileStateCard(
+                //       citiesCount: stats['cities']!,
+                //       checksCount: stats['checks']!,
+                //       alertsCount: stats['alerts']!,
+                //     );
+                //   }
+                //   ),
                
                 const SizedBox(height: 28,),
                 Align(

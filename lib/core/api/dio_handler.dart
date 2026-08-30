@@ -29,7 +29,7 @@ class DioHandler {
     );
   }
 
-  factory DioHandler() => _instance; // برجع اوبجيكت موجود بالاصل
+  factory DioHandler() => _instance; 
  Future<dynamic>get(
   String path,{
     Map<String,dynamic>?queryParameters,
@@ -51,4 +51,3 @@ class DioHandler {
 
  
 }
-//محرك اتصال بالانترنت بضمن ان التطبيق كامل بوفر نسخة واحدة فقط من الديو طول الوقت

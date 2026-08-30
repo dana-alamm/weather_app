@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/core/models/search_result_weather_model.dart';
 import 'package:weather_app/core/services/api_services.dart';
 import 'package:weather_app/core/services/location_service.dart';
 import 'package:weather_app/core/models/weather_model.dart'; 

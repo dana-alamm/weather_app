@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/weather_icon_helper.dart';
+import 'package:weather_app/core/models/current_weather_model.dart';
+import 'package:weather_app/core/models/hourly_weather_model.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';

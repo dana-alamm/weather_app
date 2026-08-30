@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/models/current_weather_model.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 

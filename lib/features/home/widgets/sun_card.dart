@@ -2,24 +2,28 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class SunCard extends StatelessWidget {
   final String sunrise;
-  final String now;
+  final String? now;
   final String sunset;
   final double progress;
   const SunCard({
     super.key,
     this.sunrise = '07:13',
-    this.now = '13:59',
+    this.now ,
     this.sunset = '19:36',
     this.progress = 0.65,});
 
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
+
+    final currentDateTime=DateTime.now();
+    final currentNowStr=now??DateFormat('HH:mm').format(currentDateTime);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -63,7 +67,7 @@ class SunCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildTimeColumn('SUNRISE', sunrise, isDark: isDark),
-              _buildTimeColumn('NOW', now, isHighlighted: true, isDark: isDark),
+              _buildTimeColumn('NOW', currentNowStr, isHighlighted: true, isDark: isDark),
               _buildTimeColumn('SUNSET', sunset, isDark: isDark),
             ],
           ),

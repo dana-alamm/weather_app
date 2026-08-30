@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/models/current_weather_model.dart';
 import 'package:weather_app/core/models/weather_model.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/home/widgets/detail_card.dart';
