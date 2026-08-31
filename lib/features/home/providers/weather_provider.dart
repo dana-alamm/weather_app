@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/core/models/current_weather_model.dart';
 import 'package:weather_app/core/models/daily_weather_model.dart';
 import 'package:weather_app/core/models/hourly_weather_model.dart';
@@ -42,6 +43,26 @@ class WeatherProvider extends ChangeNotifier {
       return tempInCelsius.round();
     }else{
       return ((tempInCelsius *9 /5)+32).round();
+    }
+
+   }
+
+   String _timeFormat='24h';
+   String get timeFormat=>_timeFormat;
+   bool get is24Hour=>_timeFormat=='24h';
+
+   void setTimeFormat(String format){
+    if(_timeFormat==format)return;
+    _timeFormat=format;
+    notifyListeners();
+   }
+
+   String formatTime(DateTime? dateTime){
+    if(dateTime==null)return '';
+    if(is24Hour){
+      return DateFormat('HH:mm').format(dateTime);
+    }else{
+      return DateFormat('h a').format(dateTime);
     }
 
    }

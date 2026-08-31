@@ -16,7 +16,7 @@ class HourlyWeatherModel{
     required this.rainAmount
   });
   String get assetIcon=>getWeatherAssetIcon(icon);
-  String get formattedHour=>DateFormat('h a').format(time).toLowerCase();
+  // String get formattedHour=>DateFormat('h a').format(time).toLowerCase();
 
   factory HourlyWeatherModel.fromJson(Map<String,dynamic>json){
     final weatherList=json['weather'] as List?;

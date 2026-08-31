@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/features/home/providers/weather_provider.dart';
 
 
 class PrecipitationCard extends StatelessWidget {
@@ -15,6 +17,7 @@ final List<HourlyWeatherModel>hourly;
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
+     final weatherProvider = Provider.of<WeatherProvider>(context);
    final items = hourly.take(6).toList();
    if (items.isEmpty) {
       return const SizedBox.shrink();
@@ -36,11 +39,12 @@ final List<HourlyWeatherModel>hourly;
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: items.map((item)=>_buildBarItem(item)).toList(),
+        //children: items.map((item)=>_buildBarItem(item)).toList(),
+        children: items.map((item) => _buildBarItem(item, weatherProvider)).toList(),
       ),
     );
   }
-  Widget _buildBarItem(HourlyWeatherModel item) {
+  Widget _buildBarItem(HourlyWeatherModel item,WeatherProvider weatherProvider) {
     
     const double maxHeight = 60;
     const double maxVal = 2.5;
@@ -50,13 +54,16 @@ final List<HourlyWeatherModel>hourly;
 
     final isHigh=displayValue>=2.0;
 
+
+
     return Column(
       mainAxisSize: MainAxisSize.min,
      
       children: [
         
         Text(
-          item.formattedHour,
+         // item.formattedHour,
+         weatherProvider.formatTime(item.time),
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w500,

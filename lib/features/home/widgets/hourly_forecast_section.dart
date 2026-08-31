@@ -24,7 +24,7 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
-    
+    final weatherProvider = Provider.of<WeatherProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,7 +56,7 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
           itemBuilder: (context, index) {
             final item=widget.hourly[index];
             return HourlyForecastCard( 
-            time:item.formattedHour, 
+            time: weatherProvider.formatTime(item.time),
             imagePath: item.assetIcon,
             temp: item.temp,
          

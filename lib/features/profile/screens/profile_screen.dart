@@ -100,11 +100,13 @@ class ProfileScreen extends StatelessWidget {
                           PreferenceTile(
                             iconEmoji: '🕒',
                             title: 'Time Format',
-                            value: '24h',
+                            value: weatherProvider.timeFormat,
                             showDivider: false,
                             options: ['24h', '12h'],
                             onOptionSelected: (selectedValue) {
-                              print('Selected Format: $selectedValue');
+                              // print('Selected Format: $selectedValue');
+                              final hourCode=selectedValue=='12h'? '12h': '24';
+                              weatherProvider.setTimeFormat(selectedValue);
                             },
                           ),
                         ],
