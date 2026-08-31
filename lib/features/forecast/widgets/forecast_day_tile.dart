@@ -3,6 +3,7 @@ import 'package:weather_app/core/models/daily_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/core/widgets/temp_text.dart';
 
 
 
@@ -70,9 +71,16 @@ class ForecastDayTile extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("${forecast.minTemp.round()}°", 
-              style: TextStyles.subHeading
-              ),
+              // Text("${forecast.minTemp.round()}°", 
+              // style: TextStyles.subHeading
+              // ),
+              TempText(
+                temp: forecast.minTemp,
+                fontSize: 14,
+                fontWeight:FontWeight.w400 ,
+                  color: Color(0xff6B7280),
+              
+                ),
               const SizedBox(width: 8,),
               Container(
                 width: 36,
@@ -83,10 +91,17 @@ class ForecastDayTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Text(
-                "${forecast.maxTemp.round()}°",
-                style: TextStyles.subHeading,
-              )
+              // Text(
+              //   "${forecast.maxTemp.round()}°",
+              //   style: TextStyles.subHeading,
+              // )
+              TempText(
+                temp: forecast.maxTemp,
+                fontSize: 14,
+                fontWeight:FontWeight.w400 ,
+                  color: Color(0xff6B7280),
+              
+                ),
             ],
           ),
         ],

@@ -5,6 +5,7 @@ import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/core/widgets/temp_text.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_card.dart';
 
 class MainForcastCard extends StatelessWidget {
@@ -55,13 +56,16 @@ class MainForcastCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                 '${weather.temp.round()}°',
-                style: TextStyles.temperatureNum.copyWith(
-                  fontSize: 34,
-                  color: isDark?Colors.white:Colors.black
-                ),
-              ),
+              // Text(
+              //    '${weather.temp.round()}°',
+              //   style: TextStyles.temperatureNum.copyWith(
+              //     fontSize: 34,
+              //     color: isDark?Colors.white:Colors.black
+              //   ),
+              //),
+              TempText(
+                temp: weather.temp,
+                fontSize: 52),
               const SizedBox(height: 4,),
               Text(
                 weather.condition,

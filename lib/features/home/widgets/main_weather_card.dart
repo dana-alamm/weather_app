@@ -148,7 +148,7 @@ class MainWeatherCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Feels ',
+                          'Feels',
                           style: TextStyles.feelsTemp.copyWith(
           color: Colors.white,
         ),
