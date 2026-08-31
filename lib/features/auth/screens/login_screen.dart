@@ -6,6 +6,7 @@ import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_text_field.dart';
+import 'package:weather_app/features/auth/screens/forget_password_screen.dart';
 import 'package:weather_app/features/auth/screens/signup_screen.dart';
 import 'package:weather_app/features/auth/services/auth_services.dart';
 import 'package:weather_app/features/home/screens/home_screen.dart';
@@ -212,7 +213,9 @@ Future<void>_login()async{
                                 ),
                                 const Spacer(),
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const ForgetPasswordScreen()));
+                                  },
                                   child: const Text(
                                     'Forget password?',
                                     style: TextStyle(

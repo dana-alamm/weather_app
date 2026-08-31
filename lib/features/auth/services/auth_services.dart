@@ -128,4 +128,7 @@ class AuthServices {
         return e.message ?? 'An error occurred. Please try again.';
     }
   }
+  Future<void> sendPasswordResetEmail({required String email}) async {
+  await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+}
 }
