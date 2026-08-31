@@ -3,6 +3,7 @@ import 'package:weather_app/core/models/search_result_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/core/widgets/temp_text.dart';
 
 class RecentCityTile extends StatelessWidget {
   final SearchResultWeatherModel city;
@@ -54,9 +55,13 @@ class RecentCityTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('${city.temp.round()}°', style: TextStyles.recentTemp.copyWith(
-                  color:isDark?Colors.white:Color(0xff2D3561),
-                )),
+                // Text('${city.temp.round()}°', style: TextStyles.recentTemp.copyWith(
+                //   color:isDark?Colors.white:Color(0xff2D3561),
+                // )),
+                TempText(
+                  temp: city.temp,
+                  fontSize: 22,
+                  ),
                 Text(city.condition, style: TextStyles.countryName),
               ],
             ),

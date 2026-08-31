@@ -5,6 +5,7 @@ import 'package:weather_app/core/models/search_result_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart'; 
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/core/widgets/temp_text.dart';
 import 'package:weather_app/features/search/providers/search_provider.dart';
 
 class SearchResultCard extends StatelessWidget {
@@ -40,12 +41,16 @@ class SearchResultCard extends StatelessWidget {
               child: Column(
                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    '${weather.temp.round()}°',
-                    style: TextStyles.temperatureNum.copyWith(
-                      color:isDark?Colors.white:Colors.black,
+                  // Text(
+                  //   '${weather.temp.round()}°',
+                  //   style: TextStyles.temperatureNum.copyWith(
+                  //     color:isDark?Colors.white:Colors.black,
+                  //   ),
+                  // ),
+                  TempText(
+                    temp: weather.temp,
+                    fontSize: 52,
                     ),
-                  ),
                   const SizedBox(height: 12),
                   Text(
                     weather.condition,
