@@ -10,6 +10,8 @@ import 'package:weather_app/features/profile/services/user_stats_service.dart';
 class WeatherProvider extends ChangeNotifier {
 
   String cityName='Loading...';
+ 
+  
   final ApiServices _apiServices=ApiServices();
   
 
@@ -20,6 +22,29 @@ class WeatherProvider extends ChangeNotifier {
   String? errorMessage;
 
   
+
+   String _temperatureUnit='metric';
+   String get temperatureUnit=>_temperatureUnit;
+   bool get isCelsius=>_temperatureUnit=='metric';
+   String get unitLabel=>isCelsius?'Celsius' : 'Fahrenheit';
+   String get tempSymbol=>isCelsius?'°C' : '°F';
+
+
+   void setTemperatureUnit(String unit){
+    if (_temperatureUnit == unit) return;
+    _temperatureUnit = unit;
+    notifyListeners();
+   }
+
+   int formatTemp(double? tempInCelsius){
+    if (tempInCelsius==null)return 0;
+    if(isCelsius){
+      return tempInCelsius.round();
+    }else{
+      return ((tempInCelsius *9 /5)+32).round();
+    }
+
+   }
 
   Future<void> fetchWeatherData({
   double? lat,
@@ -60,6 +85,8 @@ class WeatherProvider extends ChangeNotifier {
 
     // await _statsService.incrementChecks();
 
+    
+
     final hasAlert=(currentWeather?.rainAmount !=null && currentWeather!.rainAmount!>0)||
     (currentWeather?.windSpeed??0)>8.0||
     (currentWeather?.visibility ?? 10000) < 2000 ||
@@ -76,5 +103,7 @@ class WeatherProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
 
 }

@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/forecast/screens/forecast_screen.dart';
+import 'package:weather_app/features/home/providers/weather_provider.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_card.dart';
 
 class HourlyForecastSection extends StatefulWidget {
@@ -22,6 +24,7 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -55,7 +58,8 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
             return HourlyForecastCard( 
             time:item.formattedHour, 
             imagePath: item.assetIcon,
-            temp: '${item.temp.round()}°',
+            temp: item.temp,
+         
             rainProbability: '${(item.pop * 100).round()}%',
             isSelected: selectedIndex==index,
             onTap: (){

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
+import 'package:weather_app/core/widgets/temp_text.dart';
+import 'package:weather_app/features/home/providers/weather_provider.dart';
 
 class HourlyForecastCard extends StatelessWidget {
   final String time;
   final String imagePath;
-  final String temp;
+  final double temp;
   final String rainProbability;
   final bool isSelected;
   final VoidCallback? onTap;
@@ -22,7 +25,7 @@ class HourlyForecastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
-
+  
     final Color cardBg=isDark
     ?(isSelected ?const Color(0xFF263352) : AppColors.darkCardBg)
     :(isSelected ? const Color(0xFFDCE8FD) : Colors.white.withOpacity(0.9));
@@ -79,13 +82,18 @@ class HourlyForecastCard extends StatelessWidget {
                 color: Color(0xFF64B5F6),
               ),
             ),
-            Text(
-              temp,
-              style:  TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color:isDark?Colors.white :Color(0xFF1E293B),
-              ),
+            // Text(
+            //   temp,
+            
+            //   style:  TextStyle(
+            //     fontSize: 15,
+            //     fontWeight: FontWeight.bold,
+            //     color:isDark?Colors.white :Color(0xFF1E293B),
+            //   ),
+            // ),
+            TempText(
+              temp: temp,
+              fontSize: 15,
             ),
             Text(
               rainProbability,
