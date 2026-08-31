@@ -10,28 +10,14 @@ import 'package:weather_app/core/widgets/user_avatar.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 import 'package:weather_app/features/profile/services/user_stats_service.dart';
 import 'package:weather_app/features/profile/widgets/preference_tile.dart';
-import 'package:weather_app/features/profile/widgets/profile_state_card.dart';
+
 import 'package:weather_app/features/profile/widgets/settings_card.dart';
 import 'package:weather_app/features/profile/widgets/sign_out_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-// Future<Map<String,int>>_getUserStats()async{
-//   final prefs=await SharedPreferences.getInstance();
-//   final uid = FirebaseAuth.instance.currentUser?.uid ?? 'guest';
 
-//   final citiesList=prefs.getStringList('recent_search_$uid')??[];
-//   final checks = prefs.getInt('checks_count_$uid') ?? 0;
-//     final alerts = prefs.getInt('alerts_count_$uid') ?? 0;
-
-//     return{
-//       'cities': citiesList.length,
-//       'checks': checks,
-//       'alerts': alerts,
-//     };
-// }
-// Future<Map<String,int>>_getUserStats()=>UserStatsService().getAllStats();
   @override
   Widget build(BuildContext context) {
     
@@ -81,17 +67,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox( height: 35,),
 
-                // FutureBuilder(
-                //   future: _getUserStats(), 
-                //   builder: (context,snapshot){
-                //     final stats=snapshot.data??{'cities':0,'checks': 0, 'alerts': 0};
-                //     return ProfileStateCard(
-                //       citiesCount: stats['cities']!,
-                //       checksCount: stats['checks']!,
-                //       alertsCount: stats['alerts']!,
-                //     );
-                //   }
-                //   ),
+               
                
                 const SizedBox(height: 28,),
                 Align(
@@ -116,27 +92,28 @@ class ProfileScreen extends StatelessWidget {
         iconEmoji: '🌡️',
         title: 'Temperature',
         value: 'Celsius',
-        onTap: () {},
+        options: ['Celsius', 'Fahrenheit'],
+         
+        showDivider: true,
+
+        onOptionSelected: (selectedValue){
+      print('Selected Unit: $selectedValue');
+        },
       ),
-      PreferenceTile(
-        iconEmoji: '💨',
-        title: 'Wind Speed',
-        value: 'm/s',
-        onTap: () {},
-      ),
+     
       PreferenceTile(
         iconEmoji: '🕒',
         title: 'Time Format',
         value: '24h',
-        onTap: () {},
+         showDivider: false,
+        options: ['24h', '12h'] ,
+        onOptionSelected: (selectedValue) {
+  
+       print('Selected Format: $selectedValue');
+   
+  },
       ),
-      PreferenceTile(
-        iconEmoji: '📍',
-        title: 'Home Location',
-        value: 'Turin, IT',
-        showDivider: false, 
-        onTap: () {},
-      ),
+     
                    
                 
               ],
