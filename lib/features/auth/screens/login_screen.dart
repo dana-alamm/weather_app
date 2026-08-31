@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:weather_app/core/services/shared_prefs_service.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
@@ -26,6 +27,59 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
   bool loader = false;
 
+@override
+void initState(){
+  super.initState();
+  _loadSavedEmail();
+
+}
+
+
+void _loadSavedEmail(){
+  final savedEmail=SharedPrefsService.getData(key: 'saved_email')as String?;
+  if(savedEmail!=null && savedEmail.isNotEmpty){
+    emailController.text=savedEmail;
+    setState(() {
+      _rememberMe=true;
+    });
+  }
+}
+
+Future<void>_login()async{
+  setState(() {
+    loader=true;
+  });
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(), 
+      password: passwordController.text.trim(),
+      );
+      if(_rememberMe){
+        await SharedPrefsService.saveData(
+          key: 'saved_email', 
+          value: emailController.text.trim());
+      }else{
+        await SharedPrefsService.removeData(key: 'saved_email');
+      }
+  } on FirebaseAuthException catch(e){
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? 'Login failed')),
+      );
+  }finally{
+    if (mounted) {
+        setState(() {
+          loader = false;
+        });
+      }
+  }
+ 
+}
+@override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
@@ -191,36 +245,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ? null
                                 :() async{
                                   if(_formKey.currentState!.validate()){
-                                    setState(()=>loader=true);
-                                    try {
-                                      await AuthServices().logIn(
-                                        email: emailController.text.trim(),
-                                        password: passwordController.text,
-                                      );
-                                      if(!mounted)return;
-                    
-                                      Navigator.pushAndRemoveUntil(
-                                        context, 
-                                        MaterialPageRoute(builder: (context)=>HomeScreen()), 
-                                        (route)=>false);
-                                    } catch (e) {
-                                      if(!mounted)return;
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                         SnackBar(
-                                          content: Text(e.toString()),
-                                          backgroundColor: Colors.redAccent,
-                                          ),
-                                      );
-                                    
-                                    }finally{
-                                     if(mounted){
-                                      setState(() => loader=false,);
-                                     }
-                                    }
-                                      
-                                    
+                                    await _login();
+                                
                                   }
-                                },
+                                  },
                                
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.blueColor,
