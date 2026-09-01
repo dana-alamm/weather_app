@@ -9,7 +9,7 @@ import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/core/widgets/user_avatar.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
 import 'package:weather_app/features/home/providers/weather_provider.dart';
-import 'package:weather_app/features/profile/services/user_stats_service.dart';
+
 import 'package:weather_app/features/profile/widgets/preference_tile.dart';
 
 import 'package:weather_app/features/profile/widgets/settings_card.dart';

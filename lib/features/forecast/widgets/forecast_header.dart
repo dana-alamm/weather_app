@@ -46,7 +46,7 @@ class ForecastHeader extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                '7-Day Forecast',
+                '9-Day Forecast',
                 style: TextStyles.Heading1.copyWith(
                   color:isDark?Colors.white:Colors.black,
                 ),

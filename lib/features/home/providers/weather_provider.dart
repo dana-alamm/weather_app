@@ -6,7 +6,8 @@ import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/services/api_services.dart';
 import 'package:weather_app/core/services/location_service.dart';
-import 'package:weather_app/features/profile/services/user_stats_service.dart';
+import 'package:weather_app/core/services/shared_prefs_service.dart';
+
 
 class WeatherProvider extends ChangeNotifier {
 
@@ -25,16 +26,39 @@ class WeatherProvider extends ChangeNotifier {
   
 
    String _temperatureUnit='metric';
+  
+
+
+
+static const String _tempUnitKey='user_temp_unit';
+static const String _timeFormatKey='user_time_format';
+
+WeatherProvider(){
+  _loadSettingsFromPrefs();
+}
+
+void _loadSettingsFromPrefs(){
+  final savedUnit=SharedPrefsService.getData(key:_tempUnitKey)as String?;
+  final savedTime=SharedPrefsService.getData(key: _timeFormatKey)as String?;
+
+  if(savedUnit!=null){
+    _temperatureUnit=savedUnit;
+  }
+  if (savedTime != null) {
+      _timeFormat = savedTime;
+    }
+    notifyListeners();
+}
    String get temperatureUnit=>_temperatureUnit;
    bool get isCelsius=>_temperatureUnit=='metric';
    String get unitLabel=>isCelsius?'Celsius' : 'Fahrenheit';
    String get tempSymbol=>isCelsius?'°C' : '°F';
 
-
-   void setTemperatureUnit(String unit){
+   void setTemperatureUnit(String unit)async{
     if (_temperatureUnit == unit) return;
     _temperatureUnit = unit;
     notifyListeners();
+    await SharedPrefsService.saveData(key: _tempUnitKey, value: unit);
    }
 
    int formatTemp(double? tempInCelsius){
@@ -51,10 +75,12 @@ class WeatherProvider extends ChangeNotifier {
    String get timeFormat=>_timeFormat;
    bool get is24Hour=>_timeFormat=='24h';
 
-   void setTimeFormat(String format){
+   void setTimeFormat(String format)async{
     if(_timeFormat==format)return;
     _timeFormat=format;
     notifyListeners();
+
+    await SharedPrefsService.saveData(key: _timeFormatKey, value: format);
    }
 
    String formatTime(DateTime? dateTime){
