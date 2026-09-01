@@ -62,6 +62,13 @@ Future<void>_login()async{
       }else{
         await SharedPrefsService.removeData(key: 'saved_email');
       }
+      if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(), 
+      ),
+    );
   } on FirebaseAuthException catch(e){
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.message ?? 'Login failed')),
@@ -235,15 +242,7 @@ Future<void>_login()async{
                               width: double.infinity,
                               height: 52,
                               child: ElevatedButton(
-                                // onPressed: () {
-                                //   Navigator.pushAndRemoveUntil(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => const HomeScreen(),
-                                //     ),
-                                //     (route) => false,
-                                //   );
-                                // },
+                                
                                 onPressed:loader
                                 ? null
                                 :() async{
