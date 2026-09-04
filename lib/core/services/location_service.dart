@@ -39,7 +39,7 @@ try {
     :(place.administrativeArea??'Unknown City');
   }
 } catch (e) {
-  cityName='Unknown City';
+  cityName='Unknown City'; // if there is any error inside the try 
 }
 return{
  'cityName': cityName,

@@ -7,10 +7,15 @@ import 'package:weather_app/core/services/shared_prefs_service.dart';
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+ 
+ final GoogleSignIn _googleSignIn=GoogleSignIn.instance;
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();// if the user login or sign out
   User? get currentUser => _auth.currentUser;
+
+  Future<void> initGoogleSignIn()async{
+    await _googleSignIn.initialize();
+  }
 
   Future<UserCredential> signUp({
     required String firstName,
@@ -68,35 +73,40 @@ class AuthServices {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) {
-        return null;
-      }
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final OAuthCredential credential = GoogleAuthProvider.credential(//change form googleKey to firebase key
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      UserCredential userCredential = await _auth.signInWithCredential(
-        credential,
-      );
+   try {
+     await _googleSignIn.initialize();
+     final GoogleSignInAccount? googleUser=await _googleSignIn.authenticate();
+     if(googleUser==null){
+      return null;
+     }
+   final GoogleSignInAuthentication googleAuth=await googleUser.authentication;
+   final clientAuth=await googleUser.authorizationClient.authorizeScopes([
+    'email',
+    'profile',
+   ]);
+   final OAuthCredential credential=GoogleAuthProvider.credential(
+    accessToken: clientAuth.accessToken,
+    idToken: googleAuth.idToken,
 
-      final User? user = userCredential.user;
-      if (user != null) {
-        await _firestore.collection('users').doc(user.uid).set({
+   );
+   final UserCredential userCredential=await _auth.signInWithCredential(credential);
+
+   final User? user=userCredential.user;
+   if(user!=null){
+    await _firestore.collection('users').doc(user.uid).set({
           'uid': user.uid,
           'email': user.email ?? '',
           'firstName': user.displayName?.split(' ').first ?? '',
           'lastName': user.displayName?.split(' ').skip(1).join(' ') ?? '',
           'createdAt': FieldValue.serverTimestamp(),
-        }, SetOptions(merge: true));
-        await SharedPrefsService.saveData(key: 'isLoggedIn', value: true);
+   },SetOptions(merge: true));
+   await SharedPrefsService.saveData(key: 'isLoggedIn', value: true);
         await SharedPrefsService.saveData(key: 'uId', value: user.uid);
-      }
+   }
       return userCredential;
-    } on FirebaseAuthException catch (e) {
+    } on GoogleSignInException catch (e) {
+      return null;
+    }on FirebaseAuthException catch(e){ 
       throw _handleAuthException(e);
     } catch (e) {
       throw e.toString();

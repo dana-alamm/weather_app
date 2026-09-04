@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/features/auth/screens/login_screen.dart';
+import 'package:weather_app/features/auth/services/auth_services.dart';
 import 'package:weather_app/features/home/screens/home_screen.dart';
 
 class AuthGate extends StatelessWidget {
@@ -9,7 +10,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
+      stream: AuthServices().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(

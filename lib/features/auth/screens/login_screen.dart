@@ -259,16 +259,7 @@ Future<void>_login()async{
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
-                                // child: const Text(
-                                //   'Log In',
-                                //   style: TextStyle(
-                                //     fontFamily: 'Inter',
-                                //     color: Colors.white,
-                                //     fontSize: 14,
-                                //     height: 1.4,
-                                //     letterSpacing: -0.32,
-                                //   ),
-                                // ),
+                               
                                 child: loader
                                 ?const SizedBox(
                                   height: 20,
@@ -349,7 +340,7 @@ Future<void>_login()async{
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const WelcomeScreen(),
+                                            const HomeScreen(),
                                       ),
                                     );
                                   }

@@ -46,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark=Theme.of(context).brightness==Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: AppBackground(
         child: SafeArea(
@@ -73,15 +73,18 @@ class _SignupScreenState extends State<SignupScreen> {
                               IconButton(
                                 constraints: const BoxConstraints(),
                                 onPressed: () => Navigator.pop(context),
-                                icon:  Icon(
+                                icon: Icon(
                                   Icons.arrow_back,
-                                  color:isDark?Colors.white: Colors.black,
+                                  color: isDark ? Colors.white : Colors.black,
                                 ),
                               ),
                               const SizedBox(height: 40),
-                              Text('Register', style: TextStyles.Heading1.copyWith(
-                                color:isDark?Colors.white:Colors.black
-                              )),
+                              Text(
+                                'Register',
+                                style: TextStyles.Heading1.copyWith(
+                                  color: isDark ? Colors.white : Colors.black,
+                                ),
+                              ),
                               const SizedBox(height: 10),
                               const Text(
                                 'Create an account to continue! ',
@@ -284,7 +287,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 height: 50,
                                 child: ElevatedButton(
                                   onPressed: _isLoading
-                                      ? null
+                                      ? null //non pressed button
                                       : () async {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -317,11 +320,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 ),
                                               );
                                               Navigator.pushAndRemoveUntil(
-                                                context, 
+                                                context,
                                                 MaterialPageRoute(
-                                                  builder: (context)=>const HomeScreen(),
-                                                  ), 
-                                                (route)=>false);
+                                                  builder: (context) =>
+                                                      const HomeScreen(),
+                                                ),
+                                                (route) => false,
+                                              );
                                             } catch (e) {
                                               if (!mounted) return;
                                               ScaffoldMessenger.of(

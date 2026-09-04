@@ -15,7 +15,14 @@ class ErrorHandler {
           final statusCode = error.response?.statusCode;
           if (statusCode == 404) {
             return NotFoundException('City or weather data not found.');
-          } else if (statusCode != null && statusCode >= 500) {
+          }else if(statusCode==401){
+ return UnauthorizedException('Invalid or inactive API Key.');
+          }else if(statusCode==404){
+            return NotFoundException('City or weather data not found.');
+          }else if(statusCode==429){
+            return UnknownException('Too many requests. Please try again in a moment.');
+          }
+           else if (statusCode != null && statusCode >= 500) {
             return ServerException('Server error. Please try again later.');
           }
           return UnknownException('Received invalid status: $statusCode');
