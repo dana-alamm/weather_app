@@ -55,9 +55,7 @@ class RecentCityTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                // Text('${city.temp.round()}°', style: TextStyles.recentTemp.copyWith(
-                //   color:isDark?Colors.white:Color(0xff2D3561),
-                // )),
+               
                 TempText(
                   temp: city.temp,
                   fontSize: 22,

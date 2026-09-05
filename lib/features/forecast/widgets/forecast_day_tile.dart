@@ -12,16 +12,15 @@ class ForecastDayTile extends StatelessWidget {
   final DailyWeatherModel forecast;
   const ForecastDayTile({super.key, required this.forecast});
 
-  Color _getBarColor(double temp){
-    if(temp<=15){
-      return AppColors.circleShape1;
-    }else if(temp<=12){
-   return Color(0xFF60A5FA);
-    }else{
-      return const Color(0xFFFBBF24);
-    }
-
+  Color _getBarColor(double temp) {
+  if (temp <= 12) {
+    return const Color(0xFF60A5FA);
+  } else if (temp <= 15) {
+    return AppColors.circleShape1;   
+  } else {
+    return const Color(0xFFFBBF24);
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ForecastDayTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        //color: Colors.white,
+        
         color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(16),
       ),
@@ -71,9 +70,7 @@ class ForecastDayTile extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Text("${forecast.minTemp.round()}°", 
-              // style: TextStyles.subHeading
-              // ),
+              
               TempText(
                 temp: forecast.minTemp,
                 fontSize: 14,
@@ -91,10 +88,7 @@ class ForecastDayTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              // Text(
-              //   "${forecast.maxTemp.round()}°",
-              //   style: TextStyles.subHeading,
-              // )
+              
               TempText(
                 temp: forecast.maxTemp,
                 fontSize: 14,

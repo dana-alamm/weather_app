@@ -23,7 +23,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     final isDark=Theme.of(context).brightness==Brightness.dark;
     return Container(
   decoration: BoxDecoration(
-    //color:Colors.white.withOpacity(0.9),
+    
     color:isDark?AppColors.darkCardBg:Colors.white.withOpacity(0.9),
     borderRadius: BorderRadius.circular(16),
 border: Border.all(
@@ -41,7 +41,7 @@ border: Border.all(
     style: TextStyle(
       fontFamily: 'Inter',
       fontSize: 15,
-      //color:Colors.black87
+     
       color: isDark ? Colors.white : Colors.black87,
     ),
     decoration: InputDecoration(

@@ -56,13 +56,7 @@ class MainForcastCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Text(
-              //    '${weather.temp.round()}°',
-              //   style: TextStyles.temperatureNum.copyWith(
-              //     fontSize: 34,
-              //     color: isDark?Colors.white:Colors.black
-              //   ),
-              //),
+             
               TempText(
                 temp: weather.temp,
                 fontSize: 52),

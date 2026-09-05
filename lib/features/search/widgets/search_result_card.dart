@@ -41,12 +41,7 @@ class SearchResultCard extends StatelessWidget {
               child: Column(
                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Text(
-                  //   '${weather.temp.round()}°',
-                  //   style: TextStyles.temperatureNum.copyWith(
-                  //     color:isDark?Colors.white:Colors.black,
-                  //   ),
-                  // ),
+                 
                   TempText(
                     temp: weather.temp,
                     fontSize: 52,

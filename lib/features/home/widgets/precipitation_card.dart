@@ -25,7 +25,7 @@ final List<HourlyWeatherModel>hourly;
     return Container(
    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
    decoration: BoxDecoration(
-       // color: Colors.white,
+       
        color:isDark?AppColors.darkCardBg:Colors.white,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
@@ -39,7 +39,7 @@ final List<HourlyWeatherModel>hourly;
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
-        //children: items.map((item)=>_buildBarItem(item)).toList(),
+       
         children: items.map((item) => _buildBarItem(item, weatherProvider)).toList(),
       ),
     );

@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       
                     },),
                     const SizedBox(height: 20),
-                    // WeatherDetailsSection(weather: provider.currentWeather!,),
+                    
                     if (provider.currentWeather != null)
                       WeatherDetailsSection(weather: provider.currentWeather!),
                     const SizedBox(height: 20),

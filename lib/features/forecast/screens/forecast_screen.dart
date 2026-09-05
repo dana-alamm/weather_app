@@ -18,37 +18,7 @@ class ForecastScreen extends StatefulWidget {
 }
 
 class _ForecastScreenState extends State<ForecastScreen> {
- // int _currentNavIndex=2;
-  // final List<DailyForeCast>_weeklyForcast=const[
-  //   DailyForeCast(
-  //    dayName: 'Thu',
-  //   dateText: 'Sep 19',
-  //   condition: 'Light Showers',
-  //   minTemp: 10,
-  //   maxTemp: 14,
-  //   iconPath: 'assets/images/🌦.png',
-  //   barColor: Color(0xFF60A5FA),
-  //     ),
-  //  DailyForeCast(
-  //   dayName: 'Fri',
-  //   dateText: 'Sep 20',
-  //   condition: 'Partly Cloudy',
-  //   minTemp: 11,
-  //   maxTemp: 17,
-  //   iconPath: 'assets/images/⛅.png',
-  //   barColor: Color(0xFF34D399),
-  //   ),
-  //   DailyForeCast(
-  //    dayName: 'Sat',
-  //   dateText: 'Sep 21',
-  //   condition: 'Sunny',
-  //   minTemp: 12,
-  //   maxTemp: 21,
-  //   iconPath: 'assets/images/☀️.png',
-  //   barColor: Color(0xFFFBBF24),
-  //   ),
- 
-  // ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

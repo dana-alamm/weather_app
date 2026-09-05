@@ -15,7 +15,7 @@ class SearchProvider extends ChangeNotifier {
   String? _errorMessage;
   List<SearchResultWeatherModel> _searchResults = [];
 
-  //static const String _recentKey = 'recent_search_cities';
+  
   String get _recentKey {
     final uid = FirebaseAuth.instance.currentUser?.uid ?? 'guest';
     return 'recent_search_$uid';
@@ -43,7 +43,7 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // _isLoading=false; // we need API here
+      
       _searchResults = (await _apiServices.searchCityWithWeather(query.trim())).cast<SearchResultWeatherModel>();
 
       notifyListeners();
@@ -71,13 +71,12 @@ class SearchProvider extends ChangeNotifier {
       final locationData = await LocationService.getCurrentLocationData();
       final String cityName = locationData['cityName'] ?? '';
 
-      // _isLoading=false;
-      // notifyListeners();
+      
       return cityName;
     } catch (e) {
-      // _isLoading=false;
+     
       _errorMessage = e.toString();
-      // notifyListeners();
+      
       return null;
     } finally {
       _isLoading = false;

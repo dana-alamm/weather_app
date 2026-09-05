@@ -91,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                             showDivider: true,
 
                             onOptionSelected: (selectedValue) {
-                              //print('Selected Unit: $selectedValue');
+                             
                               final unitCode=selectedValue=='Celsius' ? 'metric' : 'imperial';
                               weatherProvider.setTemperatureUnit(unitCode);
                             },
@@ -104,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
                             showDivider: false,
                             options: ['24h', '12h'],
                             onOptionSelected: (selectedValue) {
-                              // print('Selected Format: $selectedValue');
+                            
                               final hourCode=selectedValue=='12h'? '12h': '24';
                               weatherProvider.setTimeFormat(selectedValue);
                             },
