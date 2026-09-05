@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 import 'package:weather_app/features/home/widgets/home_header.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_section.dart';
 import 'package:weather_app/features/home/widgets/main_weather_card.dart';

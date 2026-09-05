@@ -24,7 +24,7 @@ class SearchResultWeatherModel{
   });
   String get subtitle{
     final parts=[cityName, if(state.isNotEmpty)state,country];
-    return parts.join(', ');
+    return parts.join(',');
   }
   factory SearchResultWeatherModel.fromApiJson({
     required Map<String, dynamic> geoJson,

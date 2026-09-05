@@ -50,7 +50,7 @@ class RainAlertBanner extends StatelessWidget {
         color: isDark ? AppColors.darkCardBg : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          //color: AppColors.circleShape1,
+          
           color: isDark
               ? Colors.white.withOpacity(0.06)
               : AppColors.circleShape1.withOpacity(0.5),

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/temp_text.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 
 class HourlyForecastCard extends StatelessWidget {
   final String time;
@@ -53,9 +53,7 @@ class HourlyForecastCard extends StatelessWidget {
         width: 70,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 6),
         decoration: BoxDecoration(
-          // color: isSelected
-          //     ? const Color(0xFFDCE8FD)
-          //     : Colors.white.withOpacity(0.9),
+         
           color:cardBg,
           borderRadius: BorderRadius.circular(16),
          border: cardBorder,
@@ -82,15 +80,8 @@ class HourlyForecastCard extends StatelessWidget {
                 color: Color(0xFF64B5F6),
               ),
             ),
-            // Text(
-            //   temp,
             
-            //   style:  TextStyle(
-            //     fontSize: 15,
-            //     fontWeight: FontWeight.bold,
-            //     color:isDark?Colors.white :Color(0xFF1E293B),
-            //   ),
-            // ),
+    
             TempText(
               temp: temp,
               fontSize: 15,

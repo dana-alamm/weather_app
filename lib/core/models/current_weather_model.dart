@@ -69,23 +69,23 @@ class CurrentWeatherModel {
       rain = (dataItem['rain']['1h'] as num?)?.toDouble();
     }
 
-    final sysMap =
-        dataItem['sys'] as Map<String, dynamic>? ??
-        json['sys'] as Map<String, dynamic>?;
+    // final sysMap =
+    //     dataItem['sys'] as Map<String, dynamic>? ??
+    //     json['sys'] as Map<String, dynamic>?;
 
     final int sunriseTime =
         (dataItem['sunrise'] as num?)?.toInt() ??
-        (sysMap?['sunrise'] as num?)?.toInt() ??
+        //(sysMap?['sunrise'] as num?)?.toInt() ??
         0;
 
     final int sunsetTime =
         (dataItem['sunset'] as num?)?.toInt() ??
-        (sysMap?['sunset'] as num?)?.toInt() ??
+        //(sysMap?['sunset'] as num?)?.toInt() ??
         0;
 
     final int offset =
         (json['timezone_offset'] as num?)?.toInt() ??
-        (json['timezone'] as num?)?.toInt() ??
+        (json['timezone'] as num?)?.toInt() ?? // in case there is different names in API 
         0;
 
     return CurrentWeatherModel(

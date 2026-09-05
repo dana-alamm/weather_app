@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/user_avatar.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -14,7 +14,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
     final user=FirebaseAuth.instance.currentUser;
-      final String rawEmailName=user?.email?.split('@').first ??'User';
+    final String rawEmailName=user?.email?.split('@').first ??'User';
     final String userName=(user?.displayName !=null && user!.displayName!.isNotEmpty)
     ?user!.displayName!
     :rawEmailName;
@@ -47,10 +47,7 @@ class HomeHeader extends StatelessWidget {
                       color: AppColors.anotherBlue,
                     ),
                     const SizedBox(width: 6),
-                    // Text(
-                    //   'Province of Turin',
-                    //   style: TextStyles.cityNameStyle,
-                    // )
+                  
                     Consumer<WeatherProvider>(
                       builder: (context, weatherProvider, child) {
                         if (weatherProvider.isLoading) {

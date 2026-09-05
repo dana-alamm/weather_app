@@ -5,7 +5,7 @@ import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/features/forecast/screens/forecast_screen.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 import 'package:weather_app/features/home/widgets/hourly_forecast_card.dart';
 
 class HourlyForecastSection extends StatefulWidget {
@@ -39,7 +39,7 @@ class _HourlyForecastSectionState extends State<HourlyForecastSection> {
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ForecastScreen()),
                  (route)=>false);
               },
-              child: Text('7-day forecast', style: TextStyles.savenDaysForcast),
+              child: Text('9-day forecast', style: TextStyles.savenDaysForcast),
             ),
           ],
         ),

@@ -5,7 +5,7 @@ import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 
 
 class PrecipitationCard extends StatelessWidget {

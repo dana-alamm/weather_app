@@ -4,7 +4,7 @@ import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/app_background.dart';
 import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 import 'package:weather_app/features/search/providers/search_provider.dart';
 import 'package:weather_app/features/search/widgets/current_location_button.dart';
 import 'package:weather_app/features/search/widgets/custom_search_bar.dart';

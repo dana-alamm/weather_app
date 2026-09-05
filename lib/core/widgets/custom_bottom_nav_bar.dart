@@ -11,12 +11,12 @@ import 'package:weather_app/features/search/screens/search_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
-  final ValueChanged<int>? onTap;
+ 
 
   const CustomBottomNavBar({
     super.key,
     required this.currentIndex,
-    this.onTap,
+   
   });
 
   @override

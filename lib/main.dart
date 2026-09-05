@@ -12,7 +12,7 @@ import 'package:weather_app/features/onboarding/screens/welcome_screen.dart';
 import 'package:weather_app/features/search/providers/search_provider.dart';
 import 'firebase_options.dart';
 
-import 'features/home/providers/weather_provider.dart';
+import 'core/providers/weather_provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

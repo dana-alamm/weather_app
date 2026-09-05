@@ -25,7 +25,7 @@ class WeatherProvider extends ChangeNotifier {
 
   
 
-   String _temperatureUnit='metric';
+  String _temperatureUnit='metric';
   
 
 
@@ -107,7 +107,7 @@ void _loadSettingsFromPrefs(){
     double targetLon;
 
 
-    if (lat != null && lon != null) {
+    if (lat != null && lon != null) { // like in search
       targetLat = lat;
       targetLon = lon;
       if (newCityName != null) {
@@ -130,19 +130,12 @@ void _loadSettingsFromPrefs(){
     hourlyList = results[1] as List<HourlyWeatherModel>;
     dailyList=results[2]as List<DailyWeatherModel>;
 
-    // await _statsService.incrementChecks();
 
     
 
-    final hasAlert=(currentWeather?.rainAmount !=null && currentWeather!.rainAmount!>0)||
-    (currentWeather?.windSpeed??0)>8.0||
-    (currentWeather?.visibility ?? 10000) < 2000 ||
-          (currentWeather?.temp ?? 20) > 35.0 ||
-          (currentWeather?.temp ?? 20) < 4.0;
+    
 
-      //     if (hasAlert) {
-      //   await _statsService.incrementAlerts();
-      // }
+      
   } catch (e) {
     errorMessage = e.toString();
   } finally {

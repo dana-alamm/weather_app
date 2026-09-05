@@ -6,7 +6,7 @@ import 'package:weather_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:weather_app/features/forecast/widgets/forecast_day_tile.dart';
 import 'package:weather_app/features/forecast/widgets/forecast_header.dart';
 import 'package:weather_app/features/forecast/widgets/main_forcast_card.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 import 'package:weather_app/features/home/screens/home_screen.dart';
 import 'package:weather_app/features/search/screens/search_screen.dart';
 

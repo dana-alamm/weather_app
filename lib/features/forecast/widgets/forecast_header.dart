@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/user_avatar.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 
 class ForecastHeader extends StatelessWidget {
   const ForecastHeader({super.key});

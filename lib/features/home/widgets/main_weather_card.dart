@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app/core/helpers/weather_icon_helper.dart';
+
 import 'package:weather_app/core/models/current_weather_model.dart';
 import 'package:weather_app/core/models/hourly_weather_model.dart';
 
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 import 'package:weather_app/core/widgets/temp_text.dart';
-import 'package:weather_app/features/home/providers/weather_provider.dart';
+
 
 class MainWeatherCard extends StatelessWidget {
   final  CurrentWeatherModel weather;
@@ -37,7 +36,7 @@ class MainWeatherCard extends StatelessWidget {
       ),
     boxShadow: [
       BoxShadow(
-        //color:AppColors.shadowColor.withOpacity(0.12),
+        
         color: isDark
                 ? Colors.black.withOpacity(0.25)
                 : AppColors.shadowColor.withOpacity(0.12),
@@ -54,11 +53,10 @@ class MainWeatherCard extends StatelessWidget {
           child: SizedBox(
           
             child: Image.asset(
-              //'assets/images/rain_cloud.png',
-             // getWeatherAssetIcon(weather.icon),
+              
              weather.assetIcon,
                 width: 80,
-  height: 80,
+                height: 80,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Icon(
                 Icons.cloudy_snowing,
@@ -75,13 +73,7 @@ class MainWeatherCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  // // Text(
-                  // //   '${weather.temp.round()}°',
-                   
-                  //   style: TextStyles.temperatureNum.copyWith(
-                  //     color:isDark?Colors.white:const Color(0xFF1E293B),
-                  //   ),
-                  // ),
+                 
                   TempText(
                     temp: weather.temp,
                     fontSize: 52,
@@ -101,12 +93,7 @@ class MainWeatherCard extends StatelessWidget {
                       //color:Colors.black
                       color: isDark ? const Color(0xFFCBD5E1) : Colors.black87,
                       ),
-                      // Text(
-                      //   '${maxTemp.round()}°',
-                      //   style: TextStyles.maxandMinTemperature.copyWith(
-                      //     color: isDark ? const Color(0xFFCBD5E1) : Colors.black87,
-                      //   ),
-                      // ),
+                      
                       TempText(
                         temp: maxTemp,
                         fontSize:13
@@ -116,12 +103,7 @@ class MainWeatherCard extends StatelessWidget {
                       //color: Colors.black,
                       color: isDark ? const Color(0xFFCBD5E1) : Colors.black87,
                       ),
-                      // Text(
-                      //   '${minTemp.round()}°',
-                      //   style: TextStyles.maxandMinTemperature.copyWith(
-                      //     color: isDark ? const Color(0xFFCBD5E1) : Colors.black87,
-                      //   ),
-                      // ),
+                      
                       TempText(
                         temp: minTemp,
                         fontSize: 13,
@@ -138,12 +120,7 @@ class MainWeatherCard extends StatelessWidget {
                           : Colors.black,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    // child: Text(
-                    //   'Feels ${weather.feelsLike.round()}°',
-                    //   style: TextStyles.feelsTemp.copyWith(
-                    //     color:Colors.white,
-                    //   ),
-                    // ),
+                   
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -154,9 +131,9 @@ class MainWeatherCard extends StatelessWidget {
         ),
                         ),
                         TempText(
-        temp: weather.feelsLike,
-        fontSize: 12, 
-        color: Colors.white,
+                     temp: weather.feelsLike,
+                    fontSize: 12, 
+                 color: Colors.white,
       ),
                       ],
                     ),
