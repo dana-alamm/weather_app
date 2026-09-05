@@ -10,7 +10,7 @@ class RainAlertBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final current = weather;
+    final current = weather;//  for null safety
     if (weather==null) return const SizedBox.shrink();
     final isDark=Theme.of(context).brightness==Brightness.dark;
 
@@ -46,7 +46,7 @@ class RainAlertBanner extends StatelessWidget {
      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
-        //color: Colors.white,
+        
         color: isDark ? AppColors.darkCardBg : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
@@ -60,20 +60,11 @@ class RainAlertBanner extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if(isDark)
-          Container(
-            width: 7,
-              height: 7,
-              decoration: const BoxDecoration(
-                color: Color(0xFF60A5FA),
-                shape: BoxShape.circle,
-              ),
-          )
-          else
+          
           Icon(
             iconData,
             size: 22,
-            color: Colors.black87,
+          color: isDark ? const Color(0xFF60A5FA) : Colors.black87,
           ),
           const SizedBox(width: 14),
           Expanded(

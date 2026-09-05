@@ -28,7 +28,7 @@ class MainWeatherCard extends StatelessWidget {
     width: double.infinity,
     padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 16),
     decoration: BoxDecoration(
-      //color:Colors.white,
+      
       color: isDark ? AppColors.darkCardBg : Colors.white,
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
@@ -114,7 +114,7 @@ class MainWeatherCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 4),
                     decoration: BoxDecoration(
-                      //color:Colors.black,
+                      
                       color: isDark
                           ? const Color(0xFF333E5E) 
                           : Colors.black,
@@ -127,14 +127,14 @@ class MainWeatherCard extends StatelessWidget {
                         Text(
                           'Feels',
                           style: TextStyles.feelsTemp.copyWith(
-          color: Colors.white,
+                          color: Colors.white,
         ),
                         ),
                         TempText(
-                     temp: weather.feelsLike,
-                    fontSize: 12, 
-                 color: Colors.white,
-      ),
+                       temp: weather.feelsLike,
+                       fontSize: 12, 
+                       color: Colors.white,
+                      ),
                       ],
                     ),
                   )
