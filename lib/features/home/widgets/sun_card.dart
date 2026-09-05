@@ -4,20 +4,23 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/core/providers/weather_provider.dart';
 import 'package:weather_app/core/theme/app_colors.dart';
 import 'package:weather_app/core/theme/text_styles.dart';
 
 class SunCard extends StatefulWidget {
   final String sunrise;
-  final String? now;
+  
   final String sunset;
-  final double progress;
+  
   const SunCard({
     super.key,
     required this.sunrise,
-    this.now ,
+    
      required this.sunset ,
-    this.progress = 0.65,});
+    
+    });
 
   @override
   State<SunCard> createState() => _SunCardState();
@@ -43,39 +46,47 @@ _timer=Timer.periodic(const Duration(minutes: 1), (timer){
     _timer?.cancel();
     super.dispose();
   }
-  // تحويل "07:13" إلى DateTime لليوم الحالي
-  DateTime _parseTime(String timeStr) {
-    final now = DateTime.now();
-    final parts = timeStr.split(':');
-    final hour = int.tryParse(parts[0]) ?? 0;
-    final minute = int.tryParse(parts[1]) ?? 0;
-    return DateTime(now.year, now.month, now.day, hour, minute);
-  }
+  
+ DateTime _parseTime(String timeStr) {
+  final now = DateTime.now();
+  final parts = timeStr.trim().split(':');
+  final hour = int.tryParse(parts[0]) ?? 0;
+  final minutePart = parts.length > 1 ? parts[1].split(' ')[0] : '0';
+  final minute = int.tryParse(minutePart) ?? 0;
+  return DateTime(now.year, now.month, now.day, hour, minute);
+}
 
-  // حساب نسبة حركة الشمس بين 0.0 و 1.0
+  //where is the sun now?
   double _calculateProgress(DateTime current, DateTime start, DateTime end) {
     if (current.isBefore(start)) return 0.0;
     if (current.isAfter(end)) return 1.0;
 
-    final totalSeconds = end.difference(start).inSeconds;
-    final elapsedSeconds = current.difference(start).inSeconds;
+    final totalSeconds = end.difference(start).inSeconds; //end -start
+    final elapsedSeconds = current.difference(start).inSeconds;//current-start
 
-    if (totalSeconds <= 0) return 0.0;
+    if (totalSeconds <= 0) return 0.0;//to avoid Division by zero
     return (elapsedSeconds / totalSeconds).clamp(0.0, 1.0);
   }
   @override
   Widget build(BuildContext context) {
     final isDark=Theme.of(context).brightness==Brightness.dark;
 
-    final currentDateTime=DateTime.now();
-    final currentNowStr=widget.now??DateFormat('HH:mm').format(currentDateTime);
+   
+  final weatherProvider = Provider.of<WeatherProvider>(context);
 
-    // 2. حساب حركة الشمس ديناميكياً بين الشروق والغروب 👈 (هذا الجزء المضاف)
+  final currentDateTime = DateTime.now();
   final sunriseDateTime = _parseTime(widget.sunrise);
   final sunsetDateTime = _parseTime(widget.sunset);
-  final currentProgress = widget.progress != null
-      ? _calculateProgress(currentDateTime, sunriseDateTime, sunsetDateTime)
-      : widget.progress;
+
+  
+  final sunriseDisplay = weatherProvider.formatTime(sunriseDateTime);
+  final currentNowStr = weatherProvider.formatTime(currentDateTime);
+  final sunsetDisplay = weatherProvider.formatTime(sunsetDateTime);
+ final currentProgress = _calculateProgress(
+  currentDateTime,
+  sunriseDateTime,
+  sunsetDateTime,
+);
 
     
     return Container(
@@ -120,9 +131,9 @@ _timer=Timer.periodic(const Duration(minutes: 1), (timer){
   Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildTimeColumn('SUNRISE', widget.sunrise, isDark: isDark),
+              _buildTimeColumn('SUNRISE', sunriseDisplay, isDark: isDark),
               _buildTimeColumn('NOW', currentNowStr, isHighlighted: true, isDark: isDark),
-              _buildTimeColumn('SUNSET', widget.sunset, isDark: isDark),
+              _buildTimeColumn('SUNSET', sunsetDisplay, isDark: isDark),
             ],
           ),
         ],
@@ -164,11 +175,11 @@ class SunArcPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // draw the are
+    // draw the arc
     final rect = Rect.fromCenter(
       center: Offset(size.width / 2, size.height + 10),
       width: size.width - 20,
-      //height: (size.height + 10) * 1.8,
+     
       height: size.height * 1.3,
     );
 
@@ -196,11 +207,11 @@ class SunArcPainter extends CustomPainter {
     final sunX = rect.center.dx + (rect.width / 2) * cos(angle);
     final sunY = rect.center.dy + (rect.height / 2) * sin(angle);
 
-    // توهج الشمس
+    
     final glowPaint = Paint()..color = Colors.amber.withOpacity(0.25);
     canvas.drawCircle(Offset(sunX, sunY), 14, glowPaint);
 
-    // قرص الشمس
+   
     final sunPaint = Paint()..color = const Color(0xFFFBBF24);
     canvas.drawCircle(Offset(sunX, sunY), 7, sunPaint);
   }
@@ -209,4 +220,4 @@ class SunArcPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true; 
   //when progress change repeat the draw
 }
-  
+ 
