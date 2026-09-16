@@ -25,15 +25,4 @@ A modern, responsive weather forecast application built with **Flutter** and **D
 
 ---
 
-## 📁 Project Structure
 
-```text
-lib/
-├── core/
-│   ├── theme/          # App colors, typography, and theme styling
-│   └── widgets/        # Reusable global widgets (Backgrounds, CustomNavBar)
-├── features/
-│   ├── home/           # Weather overview, live cards, and forecasts
-│   ├── search/         # City search and location query handling
-│   └── forecast/       # Multi-day and detailed forecast metrics
-└── main.dart           # App entry point and service initializations
