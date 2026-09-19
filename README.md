@@ -41,3 +41,9 @@ A modern, responsive weather forecast mobile application built using **Flutter**
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/b8e86760-d3e2-4e9b-9574-3c3505ffe810" width="220" /> | <img src="https://github.com/user-attachments/assets/075f0b24-7fb5-4a42-a4e7-381ea77cdbcd" width="220" /> |
 
+### Profile Screen
+
+| Light Mode | Dark Mode |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/6c8d5a61-ad11-4bce-a688-6da1589b789d" width="220" /> | <img src="https://github.com/user-attachments/assets/cc42b338-1ce4-4c5b-a4aa-46a820312ac2" width="220" /> |
+
