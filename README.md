@@ -23,11 +23,10 @@ A modern, responsive weather forecast mobile application built using **Flutter**
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/b6442749-d5fb-42b0-a8ff-1272bd58e209" width="220" /> | <img src="https://github.com/user-attachments/assets/39d836b7-af26-4124-be97-a1b55d8edb99" width="220" /> |
 
-### Home Screen ( Dark Mode)
+### Home Screen (Dark Mode)
 
 | Home Screen 1 | Home Screen 2 |
 | :---: | :---: |
-| <img width="384" height="836" alt="Screenshot 2026-09-19 200929" src="https://github.com/user-attachments/assets/3dc0bec2-76a1-4de7-bd4d-e1196653199a" />z | <img width="388" height="584" alt="Screenshot 2026-09-19 200940" src="https://github.com/user-attachments/assets/d598cf47-d1d3-46d5-869a-7e9987fcb49e" />
- |
+| <img src="https://github.com/user-attachments/assets/3dc0bec2-76a1-4de7-bd4d-e1196653199a" width="220" /> | <img src="https://github.com/user-attachments/assets/d598cf47-d1d3-46d5-869a-7e9987fcb49e" width="220" /> |
 
 
