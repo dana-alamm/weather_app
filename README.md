@@ -1,28 +1,3 @@
 # 🌤️ Weather App
 
-A modern, responsive weather forecast application built with **Flutter** and **Dart**. The app provides real-time atmospheric updates, dynamic weather alerts, hourly forecasts, and seamless city search using RESTful APIs and clean architecture patterns.
-
----
-
-## ✨ Features
-
-- **Live Weather Updates:** Real-time temperature, condition metrics, humidity, wind speed, pressure, and visibility based on current GPS location.
-- **Hourly & Weekly Forecast:** Detailed weather timeline breakdowns to plan ahead.
-- **Dynamic City Search:** Fast search functionality to check live weather across global locations.
-- **Persistent Preferences:** Local caching of user settings and session states powered by `shared_preferences`.
-- **Modern UI / UX:** Glassmorphism accents, smooth bottom navigation, and fully responsive layouts.
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-- **Framework:** Flutter (Dart)
-- **State Management:** Provider
-- **Networking:** HTTP / RESTful APIs
-- **Storage:** `shared_preferences` (Local key-value persistence)
-- **Location Services:** `geolocator`
-- **Architecture:** Feature-first layered structure (Presentation, Data, Domain, Core)
-
----
-
-
+A modern, responsive weather forecast mobile application built using **Flutter** and **Dart**. The app provides users with accurate real-time atmospheric updates, dynamic hourly and daily forecasts, and global city search capabilities. Designed with a sleek glassmorphic UI and intuitive navigation, it leverages RESTful APIs for real-time weather metrics, `geolocator` for device-based location tracking, and `shared_preferences` for efficient local caching of user settings and state persistence.
