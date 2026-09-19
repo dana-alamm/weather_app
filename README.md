@@ -47,3 +47,27 @@ A modern, responsive weather forecast mobile application built using **Flutter**
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/6c8d5a61-ad11-4bce-a688-6da1589b789d" width="220" /> | <img src="https://github.com/user-attachments/assets/cc42b338-1ce4-4c5b-a4aa-46a820312ac2" width="220" /> |
 
+---
+
+## ✨ Features
+
+- **Live Weather Updates:** Real-time atmospheric metrics including temperature, humidity, wind speed, pressure, and visibility based on current GPS location.
+- **Hourly & Daily Forecast:** Interactive forecast timelines to track changing conditions throughout the day and week.
+- **Dynamic City Search:** Fast search to explore weather conditions for global cities.
+- **Theme Support:** Polished UI tailored for both Light and Dark modes.
+- **Local Persistence:** Local caching of user preferences and session data using `shared_preferences`.
+- **Modern Glassmorphism UI:** Translucent cards, smooth blur effects, and custom bottom navigation.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Flutter](https://flutter.dev/) (Dart)
+- **State Management:** Provider
+- **Local Storage:** `shared_preferences`
+- **Location:** `geolocator`
+- **API & Networking:** RESTful APIs (HTTP & JSON parsing)
+
+---
+
+
